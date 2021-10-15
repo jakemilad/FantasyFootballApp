@@ -13,7 +13,9 @@ public class Player {
     protected boolean inTeam;
 
     // EFFECTS: constructs a new player with a name, a position that is
-    // either DEF, MID or ATT and a price.
+    // either DEF, MID or ATT and a price. Initializes the player to have 0 goals,
+    // 0 assists and therefore 0 points, as well as a boolean to determine if the player has
+    // been assigned to a team or not
     public Player(String playerName, String playerPosition, Double playerPrice) {
         this.name = playerName;
         this.position = playerPosition;
@@ -24,20 +26,23 @@ public class Player {
         inTeam = false;
     }
 
+    // EFFECTS: returns the name of the Player
     public String getName() {
         return this.name;
     }
 
+    // EFFECTS: returns the position of the Player
     public String getPosition() {
         return this.position;
     }
 
+    // EFFECTS: returns the price of the Player
     public Double getPrice() {
         return this.price;
     }
 
     // REQUIRES: goal > 0
-    // MODIFIES: number of points that player accumulates
+    // MODIFIES: this
     // EFFECTS: when player scores a goal, increment goals by number of goals
     // and add points to player according to goalPoints multiplier
     public void scoredGoal(int goal) {
@@ -46,7 +51,7 @@ public class Player {
     }
 
     // REQUIRES: assist > 0
-    // MODIFIES: number of points that player accumulates
+    // MODIFIES: this
     // EFFECTS: when player assists, increment assists by number of assists
     // and add points to player according to assistPoints multiplier
     public void scoredAssist(int assist) {
@@ -54,30 +59,42 @@ public class Player {
         this.points = (assist * assistPoints) + points;
     }
 
+    // EFFECTS: returns the number of points a player has accumulated
     public Integer getPoints() {
         return points;
     }
 
+    // EFFECTS: returns the number of goals a player has scored
     public Integer getGoals() {
         return goals;
     }
 
+    // EFFECTS: returns the number of assists a player has got
     public Integer getAssists() {
         return assists;
     }
 
+    // REQUIRES: goal > 0, t to be a valid and existing team
+    // MODIFIES: this and Team
+    // EFFECTS: when a player scores and has been assigned to a team, both the player
+    // and the team they are assigned to accumulate points based on the goalPoints multiplier
     public void scoredGoalTeam(int goal, Team t) {
         this.goals = goal + this.goals;
         this.points = (goal * goalPoints) + this.points;
         t.totalPoints = (goal * goalPoints) + t.totalPoints;
     }
 
+    // REQUIRES: assist > 0, t to be a valid and existing team
+    // MODIFIES: this and Team
+    // EFFECTS: when a player gets an assist and has been assigned to a team, both the player
+    // and the team they are assigned to accumulate points based on the assistPoints multiplier
     public void scoredAssistTeam(int assist, Team t) {
         this.goals = assist + this.goals;
         this.points = (assist * assistPoints) + this.points;
         t.totalPoints = (assist * assistPoints) + t.totalPoints;
     }
 
+    // EFFECTS: returns true if the player is in a team
     public boolean inTeamForPlayer() {
         return this.inTeam;
     }

@@ -29,6 +29,8 @@ public class FantasyApp {
         runFantasy();
     }
 
+    // EFFECTS: Initializes the game. Adds all players into a list of players named allPlayers,
+    // creates a list of Teams denoted as allTeams.
     public void init() {
         allPlayers = new ArrayList<>();
         allTeams = new ArrayList<>();
@@ -48,6 +50,8 @@ public class FantasyApp {
         input = new Scanner(System.in);
     }
 
+    // EFFECTS: runs the game, if q is inputted, end the game and print the
+    // statement specified, otherwise, run otherCommands.
     private void runFantasy() {
         boolean onGoing = true;
         String command = null;
@@ -69,7 +73,7 @@ public class FantasyApp {
 
     }
 
-
+    // EFFECTS: presents the list of commands in the display menu
     private void otherCommands(String command) {
         if (command.equals("l")) {
             viewLeague();
@@ -82,6 +86,9 @@ public class FantasyApp {
         }
     }
 
+    // EFFECTS: presents the list of all the teams created, denoted as a League.
+    // Prints the team name as well as the total points for the team. Prompts the functionality
+    // to configure inputted teams.
     public void viewLeague() {
         System.out.println("League Table");
         if (!(allTeams).isEmpty()) {
@@ -103,13 +110,17 @@ public class FantasyApp {
 
     }
 
+
+    // EFFECTS: prints the list of all initialized players in allPLayers as their Name
+    // and points. Functionality to configure players if inputted is selected.
     public void viewPlayers() {
         String playerCommand = "";
         System.out.println("All Players Available");
 
         if (!(allPlayers).isEmpty()) {
             for (Player playa : allPlayers) {
-                System.out.println("\n" + playa.getName() + " " + playa.getPoints());
+                System.out.println(playa.getName() + " " + " " +  playa.getPoints() + " " + " " + playa.getPosition()
+                        + " " + " " + playa.getPrice());
             }
         }
 
@@ -122,6 +133,7 @@ public class FantasyApp {
         }
     }
 
+    // EFFECTS: display menu for configuring players
     public void playerConfiguration() {
         String playerCommand = "";
         System.out.println("\n g ---> Register Goals");
@@ -137,7 +149,9 @@ public class FantasyApp {
 
     }
 
-
+    // REQUIRES: player name to be a valid player that exists in the initialized set of players.
+    // EFFECTS: if the player is in a team, accumulate points for the player and subsequently the team
+    // they are assigned to, otherwise, accumulate points for players
     public void registerGoals() {
         int goalsCommand = 0;
         String nameCommand = "";
@@ -162,6 +176,9 @@ public class FantasyApp {
 
     }
 
+    // REQUIRES: player name to be a valid player that exists in the initialized set of players.
+    // EFFECTS: if the player is in a team, accumulate points for the player and subsequently the team
+    // they are assigned to, otherwise, accumulate points for players.
     public void registerAssists() {
         int assistCommand = 0;
         String nameCommand = "";
@@ -186,6 +203,9 @@ public class FantasyApp {
     }
 
 
+    // REQUIRES: player name to be a valid player that exists in the initialized set of players.
+    // EFFECTS: if the player is in a team, accumulate points for the player and subsequently the team
+    // they are assigned to, otherwise, accumulate points for players.
     public void createTeam() {
         String createCommand = "";
         System.out.println("\n Enter Team Name");
@@ -205,6 +225,7 @@ public class FantasyApp {
 
     }
 
+    // EFFECTS: displays menu for all the configurations possible for a team,
     public void teamConfiguration() {
         String teamCommand = "";
         System.out.println("a ---> Add a Player to your team");
@@ -226,10 +247,13 @@ public class FantasyApp {
 
     }
 
+    // EFFECTS: prints the list of all players; if the player is not already in the inputted team,
+    // add the player into the  team, otherwise else print the given statement.
     public void addPlayerToTeam() {
         if (!(allPlayers).isEmpty()) {
             for (Player playa : allPlayers) {
-                System.out.println("\n" + playa.getName() + " " + playa.getPoints());
+                System.out.println(playa.getName() + " " + " " +  playa.getPoints() + " " + " " + playa.getPosition()
+                        + " " + " " + playa.getPrice());
             }
         }
         System.out.println("Which Player do you want to add");
@@ -251,7 +275,7 @@ public class FantasyApp {
         }
     }
 
-
+    // EFFECTS: prints all the players that have been added to an inputted team
     public void viewPlayersInTeam() {
         String viewCommand = "";
         System.out.println("Which team do you want to view?");
@@ -268,6 +292,7 @@ public class FantasyApp {
         }
     }
 
+    // EFFECTS: displays the menu of the game
     public void displayMenu() {
 
         System.out.println("Fantasy Super League Main Menu");
@@ -278,7 +303,5 @@ public class FantasyApp {
         System.out.println("\tq ---> Quit");
 
     }
-
-
 
 }

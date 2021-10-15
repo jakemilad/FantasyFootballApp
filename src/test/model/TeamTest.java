@@ -10,6 +10,8 @@ public class TeamTest {
     Player testMessi;
     Player testRonaldo;
     Player testSalah;
+    Player testVirgil;
+    Player testNeymar;
     Team testTeam;
     Team testTeamTwo;
 
@@ -18,6 +20,8 @@ public class TeamTest {
         testMessi = new Player("Messi","MID",15.0);
         testRonaldo = new Player("Ronaldo", "ATT",15.0);
         testSalah = new Player("Salah", "ATT",14.5);
+        testVirgil = new Player("Virgil", "DEF",14.0);
+        testNeymar = new Player("Neymar", "ATT",14.5);
         testTeam = new Team("testTeam");
         testTeamTwo = new Team("testTeamTwo");
     }
@@ -34,6 +38,18 @@ public class TeamTest {
         testTeam.addPlayer(testRonaldo);
         testTeam.addPlayer(testSalah);
         assertEquals(3, testTeam.length());
+    }
+
+    @Test
+    public void testAddPlayerAlreadyInTeam() {
+        assertEquals(0,testTeam.length());
+
+        testTeam.addPlayer(testMessi);
+        testTeam.addPlayer(testVirgil);
+        assertEquals(2,testTeam.length());
+        testTeam.addPlayer(testMessi);
+        assertEquals(2,testTeam.length());
+
     }
 
     @Test
@@ -57,7 +73,8 @@ public class TeamTest {
 
     @Test
     public void testGetTeamName() {
-        assertEquals("testTeam", testTeam.getTeamName());
+        String testString = testTeam.getTeamName();
+        assertEquals("testTeam", testString);
     }
 
     @Test
@@ -76,6 +93,20 @@ public class TeamTest {
         testTeam.addPlayer(testSalah);
         assertEquals(testMessi, testTeam.getPlayerFromTeam("Messi"));
         assertEquals(testRonaldo, testTeam.getPlayerFromTeam("Ronaldo"));
+        assertEquals(null, testTeam.getPlayerFromTeam("Virgil"));
+    }
+
+
+    @Test
+    public void testisInTeam() {
+        testTeam.addPlayer(testMessi);
+        testTeam.addPlayer(testVirgil);
+        assertTrue(testMessi.inTeam);
+        assertTrue(testVirgil.inTeam);
+
+        testTeamTwo.addPlayer(testMessi);
+        assertTrue(testMessi.inTeam);
+        assertFalse(testNeymar.inTeam);
     }
 
     @Test
@@ -90,7 +121,6 @@ public class TeamTest {
         assertTrue(testTeamTwo.inTeamForGivenPlayer(testRonaldo));
         assertFalse(testTeamTwo.inTeamForGivenPlayer(testSalah));
     }
-
 
 
 

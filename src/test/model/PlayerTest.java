@@ -115,6 +115,20 @@ class PlayerTest {
         assertFalse(testNeymar.inTeam);
     }
 
+    @Test
+    public void testInTeamForPlayer() {
+        testTeam.addPlayer(testNeymar);
+        assertTrue(testNeymar.inTeamForPlayer());
+    }
+
+    @Test
+    public void testInTeamForPlayerFlase() {
+        testTeam.addPlayer(testVirgil);
+        testTeam.addPlayer(testNeymar);
+        assertFalse(testMessi.inTeamForPlayer());
+        assertTrue(testVirgil.inTeamForPlayer());
+    }
+
 
 
 
