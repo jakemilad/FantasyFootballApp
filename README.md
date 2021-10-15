@@ -30,3 +30,16 @@ The user adds their desired players into their team, and the stats for each game
 aforementioned statistics, and a game-week points is generated for  the users team. For example, allocating 3 points
 for a goal, 2 points for an assist, a users players scores 2 goals and gets 1 assist, therefore accumulates 8 points
 for that game-week.
+
+
+## User Stories
+
+- As a user, be able to create a team and add a list of players to the team.
+- As a user, be able to create a league and add to a list of teams to the league.
+- As a user, be able to remove and add players from the team.
+- As a user, be able to have access to the entire list of players to choose from.
+- As a user, be able to update the statistics of each player such as goals and assists.
+- As a user, be able to view the total points accumulated for each team in the list of teams after each "gameweek".
+- As a user, be able to continuously accumulate points.
+
+
