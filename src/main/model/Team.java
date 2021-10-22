@@ -1,18 +1,22 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writeable;
+
 import java.util.ArrayList;
 
-public class Team {
+public class Team implements Writeable {
 
-    protected ArrayList<Player> myTeam;
-    protected int totalPoints;
+    protected ArrayList<Player> teamPlayers;
+    protected int teamPoints;
     private String name;
 
     // EFFECTS: constructs a team as a list of players and assigned a team name,
     // initializes as having 0 team points.
     public Team(String name) {
-        myTeam = new ArrayList<>();
-        totalPoints = 0;
+        teamPlayers = new ArrayList<>();
+        teamPoints = 0;
         this.name = name;
     }
 
@@ -21,19 +25,19 @@ public class Team {
     // into the team and alter their inTeam status to true.
     public void addPlayer(Player p) {
         if (!(inTeamForGivenPlayer(p))) {
-            myTeam.add(p);
+            teamPlayers.add(p);
             p.inTeam = true;
         }
     }
 
     // EFFECTS: removes player from team
     public void removePlayer(Player p) {
-        myTeam.remove(p);
+        teamPlayers.remove(p);
     }
 
     // EFFECTS: returns the total points for the team
     public Integer getPoints() {
-        return totalPoints;
+        return teamPoints;
     }
 
     // EFFECTS: returns name of the team
@@ -44,14 +48,14 @@ public class Team {
     // EFFECTS: returns number of players in the team as the size
     // of a team.
     public Integer length() {
-        return myTeam.size();
+        return teamPlayers.size();
     }
 
     // REQUIRES: Player p to be a valid and existing player in the initialized set of players
     // EFFECTS: given a String s, interpreted as the name of a Player, return the Player object
     // if the player is in the Team, otherwise print given statement
     public Player getPlayerFromTeam(String s) {
-        for (Player p : myTeam) {
+        for (Player p : teamPlayers) {
             if (s == p.getName()) {
                 return p;
             }
@@ -61,11 +65,29 @@ public class Team {
 
     // EFFECTS: if the player p is in team, return true, false otherwise
     public boolean inTeamForGivenPlayer(Player p) {
-        if (this.myTeam.contains(p)) {
+        if (this.teamPlayers.contains(p)) {
             return true;
         } else {
             return false;
         }
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Name", name);
+        json.put("Players", teamPlayersToJson());
+        json.put("Points", teamPoints);
+        return json;
+    }
+
+    private JSONArray teamPlayersToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Player p : teamPlayers) {
+            jsonArray.put(p.getName());
+        }
+        return jsonArray;
     }
 
 }

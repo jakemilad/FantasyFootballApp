@@ -3,7 +3,11 @@ package ui;
 import model.League;
 import model.Team;
 import model.Player;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,8 +15,8 @@ public class FantasyApp {
     private Team theTeam;
     private League theLeague;
     private Scanner input;
-    private ArrayList<Player> allPlayers;
-    private ArrayList<Team> allTeams;
+    private static ArrayList<Player> allPlayers;
+    private static ArrayList<Team> allTeams;
     private Player messi = new Player("Messi", "ATT", 15.0);
     private Player ronaldo = new Player("Ronaldo", "ATT", 15.0);
     private Player salah = new Player("Salah", "ATT", 14.5);
@@ -23,9 +27,16 @@ public class FantasyApp {
     private Player hernandez = new Player("Hernandez", "DEF", 12.0);
     private Player walker = new Player("Walker", "DEF", 13.0);
     private Player jaitly = new Player("AJ", "MID", 14.5);
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+    private static final String JSON_STORE = ".data/fantasy.json";
 
 
-    public FantasyApp() {
+    public FantasyApp() throws FileNotFoundException {
+        input = new Scanner(System.in);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
+        theLeague = new League();
         runFantasy();
     }
 
@@ -81,6 +92,10 @@ public class FantasyApp {
             viewPlayers();
         } else if (command.equals("c")) {
             createTeam();
+        } else if (command.equals("s")) {
+            saveState();
+        } else if (command.equals("l")) {
+            loadState();
         } else {
             System.out.println("Not valid selection");
         }
@@ -170,7 +185,9 @@ public class FantasyApp {
                         }
                     }
                 }
-                p.scoredGoal(goalsCommand);
+                if ((!(p.inTeamForPlayer())) && p.getName().equals(nameCommand)) {
+                    p.scoredGoal(goalsCommand);
+                }
             }
         }
 
@@ -197,7 +214,10 @@ public class FantasyApp {
                         }
                     }
                 }
-                p.scoredAssist(assistCommand);
+                if ((!(p.inTeamForPlayer())) && p.getName().equals(nameCommand)) {
+                    p.scoredAssist(assistCommand);
+                }
+
             }
         }
     }
@@ -292,6 +312,28 @@ public class FantasyApp {
         }
     }
 
+    public void saveState() {
+        try {
+            jsonWriter.open();
+            jsonWriter.writeLeague(theLeague);
+            jsonWriter.close();
+            System.out.println("Saved League to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable  to write file: " + JSON_STORE);
+        }
+    }
+
+    public void loadState() {
+        try {
+            theLeague = jsonReader.read();
+            allTeams = theLeague.getTeamsInLeague();
+            allPlayers = theLeague.getPlayersInLeague();
+            System.out.println("Loaded League from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to load from " + JSON_STORE);
+        }
+    }
+
     // EFFECTS: displays the menu of the game
     public void displayMenu() {
 
@@ -300,6 +342,8 @@ public class FantasyApp {
         System.out.println("\tl ---> View League");
         System.out.println("\tv ---> View Players");
         System.out.println("\tc ---> Create Team");
+        System.out.println("\ts ---> Save League Standings");
+        System.out.println("\tl ---> Load League Standings");
         System.out.println("\tq ---> Quit");
 
     }

@@ -1,6 +1,9 @@
 package model;
 
-public class Player {
+import org.json.JSONObject;
+import persistence.Writeable;
+
+public class Player implements Writeable {
 
     private String name;          // Players name
     private String position;      // Players position: (DEF, MID, ATT)
@@ -41,6 +44,10 @@ public class Player {
         return this.price;
     }
 
+    public Integer setGoals(int gl) {
+        return this.goals = gl;
+    }
+
     // REQUIRES: goal > 0
     // MODIFIES: this
     // EFFECTS: when player scores a goal, increment goals by number of goals
@@ -61,7 +68,7 @@ public class Player {
 
     // EFFECTS: returns the number of points a player has accumulated
     public Integer getPoints() {
-        return points;
+        return this.points;
     }
 
     // EFFECTS: returns the number of goals a player has scored
@@ -81,7 +88,7 @@ public class Player {
     public void scoredGoalTeam(int goal, Team t) {
         this.goals = goal + this.goals;
         this.points = (goal * goalPoints) + this.points;
-        t.totalPoints = (goal * goalPoints) + t.totalPoints;
+        t.teamPoints = (goal * goalPoints) + t.teamPoints;
     }
 
     // REQUIRES: assist > 0, t to be a valid and existing team
@@ -91,12 +98,24 @@ public class Player {
     public void scoredAssistTeam(int assist, Team t) {
         this.goals = assist + this.goals;
         this.points = (assist * assistPoints) + this.points;
-        t.totalPoints = (assist * assistPoints) + t.totalPoints;
+        t.teamPoints = (assist * assistPoints) + t.teamPoints;
     }
 
     // EFFECTS: returns true if the player is in a team
     public boolean inTeamForPlayer() {
         return this.inTeam;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name",name);
+        json.put("position", position);
+        json.put("price", price);
+        json.put("points", points);
+        json.put("assists", assists);
+        json.put("goals", goals);
+        return json;
     }
 
 

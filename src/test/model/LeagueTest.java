@@ -19,6 +19,18 @@ public class LeagueTest {
     }
 
     @Test
+    public void testGetName() {
+        assertEquals("My League",myLeague.getName());
+    }
+
+    @Test
+    public void testAddPlayerToLeague() {
+        Player p = new Player("Jake","MID",12.5);
+        myLeague.addPlayerToLeague(p);
+        assertEquals(1,myLeague.length());
+    }
+
+    @Test
     public void testAddTeam() {
         myLeague.addTeam(myTeam);
         assertEquals(1,myLeague.length());

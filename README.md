@@ -42,5 +42,6 @@ for that game-week.
 - As a user, be able to view the total points accumulated for each team in the list of teams.
 - As a user, be able to continuously accumulate points.
 - As a user, be able to view all players available.
-
+- As a user, be able to save my league table points as well as my player points.
+- As a user, be able to load my saved league table points as well as my player points.
 
