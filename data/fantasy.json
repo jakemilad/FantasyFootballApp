@@ -1,0 +1,101 @@
+{
+    "Teams": [
+        {
+            "Points": 4,
+            "Name": "Jake",
+            "Players": ["Messi"]
+        },
+        {
+            "Points": 8,
+            "Name": "Jake2",
+            "Players": ["Ronaldo"]
+        },
+        {
+            "Points": 10,
+            "Name": "Jake3",
+            "Players": ["Salah"]
+        }
+    ],
+    "Players": [
+        {
+            "assists": 0,
+            "price": 15,
+            "name": "Messi",
+            "position": "ATT",
+            "points": 4,
+            "goals": 2
+        },
+        {
+            "assists": 0,
+            "price": 15,
+            "name": "Ronaldo",
+            "position": "ATT",
+            "points": 8,
+            "goals": 4
+        },
+        {
+            "assists": 0,
+            "price": 14.5,
+            "name": "Salah",
+            "position": "ATT",
+            "points": 10,
+            "goals": 10
+        },
+        {
+            "assists": 0,
+            "price": 10,
+            "name": "Kante",
+            "position": "MID",
+            "points": 0,
+            "goals": 0
+        },
+        {
+            "assists": 0,
+            "price": 13.5,
+            "name": "Fernandes",
+            "position": "MID",
+            "points": 0,
+            "goals": 0
+        },
+        {
+            "assists": 0,
+            "price": 14,
+            "name": "De Bruyne",
+            "position": "MID",
+            "points": 0,
+            "goals": 0
+        },
+        {
+            "assists": 0,
+            "price": 11.5,
+            "name": "Pogba",
+            "position": "MID",
+            "points": 0,
+            "goals": 0
+        },
+        {
+            "assists": 0,
+            "price": 12,
+            "name": "Hernandez",
+            "position": "DEF",
+            "points": 0,
+            "goals": 0
+        },
+        {
+            "assists": 0,
+            "price": 13,
+            "name": "Walker",
+            "position": "DEF",
+            "points": 0,
+            "goals": 0
+        },
+        {
+            "assists": 0,
+            "price": 14.5,
+            "name": "AJ",
+            "position": "MID",
+            "points": 0,
+            "goals": 0
+        }
+    ]
+}

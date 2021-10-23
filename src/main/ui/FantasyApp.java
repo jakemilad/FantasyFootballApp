@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FantasyApp {
-    private Team theTeam;
     private League theLeague;
     private Scanner input;
     private static ArrayList<Player> allPlayers;
@@ -29,7 +28,7 @@ public class FantasyApp {
     private Player jaitly = new Player("AJ", "MID", 14.5);
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
-    private static final String JSON_STORE = ".data/fantasy.json";
+    private static final String JSON_STORE = "./data/fantasy.json";
 
 
     public FantasyApp() throws FileNotFoundException {
@@ -45,9 +44,10 @@ public class FantasyApp {
     public void init() {
         allPlayers = new ArrayList<>();
         allTeams = new ArrayList<>();
-        theTeam = new Team("Your Team");
         theLeague = new League();
-        theLeague.addTeam(theTeam);
+        //theLeague.addTeam(theTeam);
+        allPlayers = theLeague.getPlayersInLeague();
+        allTeams = theLeague.getTeamsInLeague();
         allPlayers.add(messi);
         allPlayers.add(ronaldo);
         allPlayers.add(salah);
@@ -94,7 +94,7 @@ public class FantasyApp {
             createTeam();
         } else if (command.equals("s")) {
             saveState();
-        } else if (command.equals("l")) {
+        } else if (command.equals("p")) {
             loadState();
         } else {
             System.out.println("Not valid selection");
@@ -232,7 +232,6 @@ public class FantasyApp {
         String name = input.next();
         Team newTeam = new Team(name);
         allTeams.add(newTeam);
-        theLeague.addTeam(newTeam);
         System.out.println("Team Successfully Created and Added to the League");
 
         System.out.println("f ---> Team Configuration");

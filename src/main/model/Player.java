@@ -109,12 +109,12 @@ public class Player implements Writeable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("name",name);
-        json.put("position", position);
-        json.put("price", price);
-        json.put("points", points);
-        json.put("assists", assists);
-        json.put("goals", goals);
+        json.put("Player Name",name);
+        json.put("Position", position);
+        json.put("Price", price);
+        json.put("Points", points);
+        json.put("Assists", assists);
+        json.put("Goals", goals);
         return json;
     }
 

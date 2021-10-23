@@ -75,9 +75,9 @@ public class Team implements Writeable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("Name", name);
-        json.put("Players", teamPlayersToJson());
-        json.put("Points", teamPoints);
+        json.put("Team Name", name);
+        json.put("Players In Team", teamPlayersToJson());
+        json.put("Team Points", teamPoints);
         return json;
     }
 

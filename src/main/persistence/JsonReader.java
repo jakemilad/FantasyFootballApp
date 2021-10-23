@@ -92,19 +92,19 @@ public class JsonReader {
 
         for (Object json : jsonArray) {
             String nextPlayer = (String) json;
-            addPlayer(lg,tm,nextPlayer);
+            //addPlayer(lg,tm,nextPlayer);
         }
     }
 
-    public void addPlayer(League lg, Team tm, String playerName) {
-        for (Player p : lg.leaguePlayers) {
-            if (p.getName().equals(playerName)) {
-                for (Team t : lg.leagueTeams) {
-                    if (t.)
-                }
-            }
-        }
-    }
+//    public void addPlayer(League lg, Team tm, String playerName) {
+////        for (Player p : lg.getPlayersInLeague()) {
+////            if (p.getName().equals(playerName)) {
+////                for (Team t : lg.getTeamsInLeague()) {
+////                    if (t.)
+////                }
+////            }
+////        }
+////    }
 
 
 }

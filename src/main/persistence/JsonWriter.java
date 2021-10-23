@@ -1,8 +1,6 @@
 package persistence;
 
 import model.League;
-import model.Player;
-import model.Team;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -22,21 +20,10 @@ public class JsonWriter {
         writer = new PrintWriter(new File(destination));
     }
 
-//    public void writePlayer(Player pl) {
-//        JSONObject json = pl.toJson();
-//        saveToFile(json.toString(TAB));
-//    }
-//
-//    public void writeTeam(Team tm) {
-//        JSONObject json = tm.toJson();
-//        saveToFile(json.toString(TAB));
-//    }
-
     public void writeLeague(League lg) {
         JSONObject json = lg.toJson();
         saveToFile(json.toString(TAB));
     }
-
 
     public void close() {
         writer.close();

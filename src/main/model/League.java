@@ -8,29 +8,31 @@ import java.util.ArrayList;
 
 public class League implements Writeable {
 
-    public ArrayList<Team> leagueTeams;
-    public ArrayList<Player> leaguePlayers;
+    private ArrayList<Team> leagueTeams;
+    private ArrayList<Player> leaguePlayers;
     private String name;
 
     // EFFECTS: constructs a League as a list of teams
     public League() {
-        this.name = "My League";
+        this.name = "The League";
         leagueTeams = new ArrayList<>();
         leaguePlayers = new ArrayList<>();
     }
 
+    // EFFECTS: returns the name of the league, constructed as "The League".
     public String getName() {
         return this.name;
     }
 
-    public ArrayList getTeamsInLeague() {
+    // EFFECTS: gets all teams in the league
+    public ArrayList<Team> getTeamsInLeague() {
         return this.leagueTeams;
     }
 
-    public ArrayList getPlayersInLeague() {
+    // EFFECTS: gets all the players in the league
+    public ArrayList<Player> getPlayersInLeague() {
         return this.leaguePlayers;
     }
-
 
     // EFFECTS: adds a Team to the league
     public void addTeam(Team t) {
@@ -43,15 +45,24 @@ public class League implements Writeable {
         leagueTeams.remove(t);
     }
 
+
     public void addPlayerToLeague(Player p) {
         leaguePlayers.add(p);
     }
 
     // EFFECTS: returns the number of teams in the league,
     // expressed as the size of the list of teams.
-    public int length() {
+    public int lengthOfLeagueTeams() {
         return leagueTeams.size();
     }
+
+
+    // EFFECTS: returns  the number of  teams in the league.
+    public int lengthOfLeaguePlayers() {
+        return leaguePlayers.size();
+    }
+
+
 
     @Override
     public JSONObject toJson() {
@@ -65,16 +76,18 @@ public class League implements Writeable {
         JSONArray jsonArray = new JSONArray();
 
         for (Team t : leagueTeams) {
-            jsonArray.put(t.getTeamName());
+            jsonArray.put(t.toJson());
         }
         return jsonArray;
     }
+
+
 
     private JSONArray leaguePlayersToJson() {
         JSONArray jsonArray = new JSONArray();
 
         for (Player p : leaguePlayers) {
-            jsonArray.put(p.getName());
+            jsonArray.put(p.toJson());
         }
         return jsonArray;
     }
