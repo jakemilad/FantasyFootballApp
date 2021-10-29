@@ -12,12 +12,14 @@ public class LeagueTest {
     Team myTeam;
     Team mySecondTeam;
     League myLeague;
+    Player myPlayer;
 
     @BeforeEach
     public void runBefore(){
         myLeague = new League();
         myTeam = new Team("testTeam");
         mySecondTeam = new Team("testSecondTeam");
+        myPlayer = new Player("testPlayer","MID",12.5);
     }
 
     @Test
@@ -78,6 +80,22 @@ public class LeagueTest {
         myLeague.addTeam(myTeam);
         myLeague.addTeam(mySecondTeam);
         assertEquals(2,myLeague.lengthOfLeagueTeams());
+    }
+
+    @Test
+    public void testAddTeamDuplicate() {
+        myLeague.addTeam(myTeam);
+        assertEquals(1,myLeague.lengthOfLeagueTeams());
+        myLeague.addTeam(myTeam);
+        assertEquals(1,myLeague.lengthOfLeagueTeams());
+    }
+
+    @Test
+    public void testAddPlayerDuplicate() {
+        myLeague.addPlayerToLeague(myPlayer);
+        assertEquals(1,myLeague.lengthOfLeaguePlayers());
+        myLeague.addPlayerToLeague(myPlayer);
+        assertEquals(1,myLeague.lengthOfLeaguePlayers());
     }
 
     @Test
