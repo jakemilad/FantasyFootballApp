@@ -1,17 +1,17 @@
 {
     "leagueTeams": [{
-        "TeamPoints": 6,
+        "TeamPoints": 0,
         "TeamName": "Jake",
         "PlayersInTeam": ["Messi"]
     }],
     "leaguePlayers": [
         {
-            "Points": 6,
+            "Points": 0,
             "Assists": 0,
             "Position": "ATT",
             "Price": 15,
             "PlayerName": "Messi",
-            "Goals": 3
+            "Goals": 0
         },
         {
             "Points": 0,
