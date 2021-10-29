@@ -6,8 +6,7 @@ import model.Team;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -82,7 +81,7 @@ public class JsonReader {
         Integer assists = jsonObject.getInt("Assists");
         Integer points = jsonObject.getInt("Points");
         Player leaguePlayer = new Player(name, position, price);
-        leaguePlayer.points = points;
+        leaguePlayer.points = points - points;
         leaguePlayer.scoredGoal(goals);
         leaguePlayer.scoredAssist(assists);
         lg.addPlayerToLeague(leaguePlayer);
@@ -95,26 +94,30 @@ public class JsonReader {
         String name = jsonObject.getString("TeamName");
         Integer teamPoints = jsonObject.getInt("TeamPoints");
         Team leagueTeam = new Team(name);
-        //addPlayersForLeagueTeam(lg, leagueTeam, jsonObject);
+        addPlayersForLeagueTeam(lg, leagueTeam, jsonObject);
         leagueTeam.teamPoints = teamPoints;
         lg.addTeam(leagueTeam);
     }
 
-//    public void addPlayersForLeagueTeam(League lg, Team tm, JSONObject jsonObject) {
-//        JSONArray jsonArray = jsonObject.getJSONArray("PlayersInTeam");
-//
-//        for (Object json : jsonArray) {
-//            String nextPlayer = (String) json;
-//            addPlayer(lg,tm,nextPlayer);
-//        }
-//    }
-//
-//
-//    public void addPlayer(League lg, Team tm, String playerName) {
-//        for (Player p : lg.getPlayersInLeague()) {
-//            if (p.getName().equals(playerName)) {
-//                tm.addPlayer(p);
-//            }
-//        }
-//    }
+    // MODIFIES: lg, tm
+    // EFFECTS: parses all players that have been added into a team as Json Objects.
+    public void addPlayersForLeagueTeam(League lg, Team tm, JSONObject jsonObject) {
+        JSONArray jsonArray = jsonObject.getJSONArray("PlayersInTeam");
+
+        for (Object json : jsonArray) {
+            String nextPlayer = (String) json;
+            addPlayer(lg,tm,nextPlayer);
+        }
+    }
+
+
+    // MODIFIES: lg, tm
+    // EFFECTS: adds players into the team for a given Json Object team in a Json Object league.
+    public void addPlayer(League lg, Team tm, String playerName) {
+        for (Player p : lg.getPlayersInLeague()) {
+            if (p.getName().equals(playerName)) {
+                tm.addPlayer(p);
+            }
+        }
+    }
 }

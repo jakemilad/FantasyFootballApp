@@ -82,6 +82,7 @@ public class Team implements Writeable {
         return json;
     }
 
+    // returns the list of all teams in the league as a Json Array.
     private JSONArray teamPlayersToJson() {
         JSONArray jsonArray = new JSONArray();
 

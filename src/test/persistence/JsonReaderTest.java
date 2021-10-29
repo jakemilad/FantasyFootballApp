@@ -6,6 +6,7 @@ import model.Team;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -39,23 +40,33 @@ public class JsonReaderTest {
     @Test
     public void testReaderGeneralFantasyApp() {
         try {
+            League lg = new League();
+            JsonWriter writer = new JsonWriter("./data/testReaderGeneralFantasyApp.json");
+            Team testTeam = new Team("testTeam");
+            Player testPlayer = new Player("testPlayer","MID",12.5);
+            Player testPlayerTwo = new Player("testPlayerTwo","ATT",12.5);
+            lg.addTeam(testTeam);
+            lg.addPlayerToLeague(testPlayer);
+            lg.addPlayerToLeague(testPlayerTwo);
+            testTeam.addPlayer(testPlayer);
+            testTeam.addPlayer(testPlayerTwo);
+            writer.open();
+            writer.writeLeague(lg);
+            writer.close();
+
             JsonReader reader = new JsonReader("./data/testReaderGeneralFantasyApp.json");
-            League lg = reader.read();
-            assertEquals(0,lg.lengthOfLeagueTeams());
-            Team tm = new Team("Test Team");
-            Player plOne = new Player("test player","MID",12.9);
-            Player plTwo = new Player("testPLayer 2","ATT",15.7);
-            lg.addTeam(tm);
-            lg.addPlayerToLeague(plOne);
+            lg = reader.read();
             assertEquals(1,lg.lengthOfLeagueTeams());
-            assertEquals(1, lg.lengthOfLeaguePlayers());
-            lg.addPlayerToLeague(plTwo);
-            assertEquals(2, lg.lengthOfLeaguePlayers());
-            tm.addPlayer(plOne);
-            assertEquals(plOne,tm.getPlayerFromTeam("test player"));
+            assertEquals(2,lg.lengthOfLeaguePlayers());
+            List<Team> testAddPlayer = lg.getTeamsInLeague();
+            testTeam = testAddPlayer.get(0);
+            assertEquals(2,testTeam.length());
         } catch (IOException e) {
-            fail("don't fail please");
+            fail("Don't fail please");
         }
     }
+
+
+
 
 }

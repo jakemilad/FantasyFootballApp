@@ -1,4 +1,28 @@
 {
-  "leagueTeams": [],
-  "leaguePlayers": []
+    "leagueTeams": [{
+        "TeamPoints": 0,
+        "TeamName": "testTeam",
+        "PlayersInTeam": [
+            "testPlayer",
+            "testPlayerTwo"
+        ]
+    }],
+    "leaguePlayers": [
+        {
+            "Points": 0,
+            "Assists": 0,
+            "Position": "MID",
+            "Price": 12.5,
+            "PlayerName": "testPlayer",
+            "Goals": 0
+        },
+        {
+            "Points": 0,
+            "Assists": 0,
+            "Position": "ATT",
+            "Price": 12.5,
+            "PlayerName": "testPlayerTwo",
+            "Goals": 0
+        }
+    ]
 }
