@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Team implements Writeable {
 
     protected ArrayList<Player> teamPlayers;
-    public int teamPoints;
+    protected int teamPoints;
     private String name;
 
     // EFFECTS: constructs a team as a list of players and assigned a team name,
@@ -35,9 +35,15 @@ public class Team implements Writeable {
         teamPlayers.remove(p);
     }
 
+
     // EFFECTS: returns the total points for the team
     public Integer getPoints() {
         return teamPoints;
+    }
+
+    // EFFECTS: sets the total points for the team as parameter i
+    public void setPointsForTeam(int i) {
+        teamPoints = i;
     }
 
     // EFFECTS: returns name of the team

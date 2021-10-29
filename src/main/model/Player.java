@@ -10,10 +10,11 @@ public class Player implements Writeable {
     private Double price;         // Players price < 15.0
     private int goals;
     private int assists;
-    public int points;
+    protected int points;
     private int goalPoints = 2;
     private int assistPoints = 1;
     protected boolean inTeam;
+
 
     // EFFECTS: constructs a new player with a name, a position that is
     // either DEF, MID or ATT and a price. Initializes the player to have 0 goals,
@@ -45,7 +46,7 @@ public class Player implements Writeable {
     }
 
     // REQUIRES: goal > 0
-    // MODIFIES: this
+    // MODIFIES: this, points
     // EFFECTS: when player scores a goal, increment goals by number of goals
     // and add points to player according to goalPoints multiplier
     public void scoredGoal(int goal) {
@@ -54,7 +55,7 @@ public class Player implements Writeable {
     }
 
     // REQUIRES: assist > 0
-    // MODIFIES: this
+    // MODIFIES: this, points
     // EFFECTS: when player assists, increment assists by number of assists
     // and add points to player according to assistPoints multiplier
     public void scoredAssist(int assist) {
@@ -65,6 +66,12 @@ public class Player implements Writeable {
     // EFFECTS: returns the number of points a player has accumulated
     public Integer getPoints() {
         return points;
+    }
+
+
+    // EFFECTS: sets the points field to given parameter i
+    public void setPoints(int i) {
+        points = i;
     }
 
     // EFFECTS: returns the number of goals a player has scored
@@ -78,7 +85,7 @@ public class Player implements Writeable {
     }
 
     // REQUIRES: goal > 0, t to be a valid and existing team
-    // MODIFIES: this and Team
+    // MODIFIES: this, Team, teamPoints, points
     // EFFECTS: when a player scores and has been assigned to a team, both the player
     // and the team they are assigned to accumulate points based on the goalPoints multiplier
     public void scoredGoalTeam(int goal, Team t) {
@@ -88,7 +95,7 @@ public class Player implements Writeable {
     }
 
     // REQUIRES: assist > 0, t to be a valid and existing team
-    // MODIFIES: this and Team
+    // MODIFIES: this, Team, teamPoints, points
     // EFFECTS: when a player gets an assist and has been assigned to a team, both the player
     // and the team they are assigned to accumulate points based on the assistPoints multiplier
     public void scoredAssistTeam(int assist, Team t) {

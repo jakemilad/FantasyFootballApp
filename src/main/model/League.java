@@ -12,7 +12,8 @@ public class League implements Writeable {
     private ArrayList<Player> leaguePlayers;
     private String name;
 
-    // EFFECTS: constructs a League as a list of teams
+    // EFFECTS: constructs a League as a list of teams, initializes the league name, league teams
+    // and league players.
     public League() {
         this.name = "The League";
         leagueTeams = new ArrayList<>();
@@ -34,7 +35,7 @@ public class League implements Writeable {
         return leaguePlayers;
     }
 
-    // EFFECTS: adds a Team to the league
+    // EFFECTS: if the team is not already in the league, adds a Team to the league
     public void addTeam(Team t) {
         if (!leagueTeams.contains(t)) {
             leagueTeams.add(t);
@@ -46,7 +47,7 @@ public class League implements Writeable {
         leagueTeams.remove(t);
     }
 
-    // EFFECTS: adds a Player to the league
+    // EFFECTS: if the player is not already in the league, adds a Player to the league.
     public void addPlayerToLeague(Player p) {
         if (!leaguePlayers.contains(p)) {
             leaguePlayers.add(p);
@@ -64,7 +65,6 @@ public class League implements Writeable {
     public int lengthOfLeaguePlayers() {
         return leaguePlayers.size();
     }
-
 
 
     @Override

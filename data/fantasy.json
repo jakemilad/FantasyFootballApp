@@ -1,24 +1,17 @@
 {
-    "leagueTeams": [
-        {
-            "TeamPoints": 0,
-            "TeamName": "Jaka",
-            "PlayersInTeam": []
-        },
-        {
-            "TeamPoints": 6,
-            "TeamName": "Jake",
-            "PlayersInTeam": ["Messi"]
-        }
-    ],
+    "leagueTeams": [{
+        "TeamPoints": 4,
+        "TeamName": "Jake",
+        "PlayersInTeam": ["Messi"]
+    }],
     "leaguePlayers": [
         {
-            "Points": 6,
+            "Points": 4,
             "Assists": 0,
             "Position": "ATT",
             "Price": 15,
             "PlayerName": "Messi",
-            "Goals": 3
+            "Goals": 2
         },
         {
             "Points": 0,
@@ -89,7 +82,7 @@
             "Assists": 0,
             "Position": "MID",
             "Price": 14.5,
-            "PlayerName": "AJ",
+            "PlayerName": "Jaitly",
             "Goals": 0
         }
     ]

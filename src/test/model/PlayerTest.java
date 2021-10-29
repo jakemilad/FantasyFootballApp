@@ -129,6 +129,13 @@ class PlayerTest {
         assertTrue(testVirgil.inTeamForPlayer());
     }
 
+    @Test
+    public void testSetPoints() {
+        int i = 3;
+        testMessi.setPoints(i);
+        assertEquals(3, testMessi.getPoints());
+    }
+
 
 
 

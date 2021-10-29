@@ -25,7 +25,7 @@ public class FantasyApp {
     private Player pogba = new Player("Pogba", "MID", 11.5);
     private Player hernandez = new Player("Hernandez", "DEF", 12.0);
     private Player walker = new Player("Walker", "DEF", 13.0);
-    private Player jaitly = new Player("AJ", "MID", 14.5);
+    private Player jaitly = new Player("Jaitly", "MID", 14.5);
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
     private static final String JSON_STORE = "./data/fantasy.json";
@@ -45,7 +45,6 @@ public class FantasyApp {
         allPlayers = new ArrayList<>();
         allTeams = new ArrayList<>();
         theLeague = new League();
-        //theLeague.addTeam(theTeam);
         allPlayers = theLeague.getPlayersInLeague();
         allTeams = theLeague.getTeamsInLeague();
         allPlayers.add(messi);
@@ -139,8 +138,8 @@ public class FantasyApp {
             }
         }
 
-        System.out.println("\n r ---> Add Player Statistics");
-        System.out.println("\n b ---> Back to Main Menu");
+        System.out.println("\nr ---> Add Player Statistics");
+        System.out.println("b ---> Back to Main Menu");
         playerCommand = input.next();
         playerCommand = playerCommand.toLowerCase();
         if (playerCommand.equals("r")) {
@@ -151,9 +150,9 @@ public class FantasyApp {
     // EFFECTS: display menu for configuring players
     public void playerConfiguration() {
         String playerCommand = "";
-        System.out.println("\n g ---> Register Goals");
-        System.out.println("\n a ---> Register Assists");
-        System.out.println("\n b ---> Back to Main Menu");
+        System.out.println("\ng ---> Register Goals");
+        System.out.println("a ---> Register Assists");
+        System.out.println("b ---> Back to Main Menu");
         playerCommand = input.next();
         playerCommand = playerCommand.toLowerCase();
         if (playerCommand.equals("g")) {
@@ -232,9 +231,9 @@ public class FantasyApp {
         String name = input.next();
         Team newTeam = new Team(name);
         allTeams.add(newTeam);
-        System.out.println("Team Successfully Created and Added to the League");
+        System.out.println("\nTeam Successfully Created and Added to the League");
 
-        System.out.println("f ---> Team Configuration");
+        System.out.println("\nf ---> Team Configuration");
         System.out.println("b ---> Back to Main Menu");
         createCommand = input.next();
         createCommand = createCommand.toLowerCase();
@@ -275,10 +274,10 @@ public class FantasyApp {
                         + " " + " " + playa.getPrice());
             }
         }
-        System.out.println("Which Player do you want to add");
+        System.out.println("\nWhich Player do you want to add?");
         String name = input.next();
 
-        System.out.println("Which team do you want to add the player to");
+        System.out.println("Which team do you want to add the player to?");
         String teamName = input.next();
 
         for (Player p : allPlayers) {
@@ -297,7 +296,7 @@ public class FantasyApp {
     // EFFECTS: prints all the players that have been added to an inputted team
     public void viewPlayersInTeam() {
         String viewCommand = "";
-        System.out.println("Which team do you want to view?");
+        System.out.println("\nWhich team do you want to view?");
         viewCommand = input.next();
 
         for (Team t : allTeams) {
@@ -311,6 +310,8 @@ public class FantasyApp {
         }
     }
 
+    // EFFECTS: saves the current state of the FantasyApp, otherwise throws FileNotFound exception
+    // if saving fails.
     public void saveState() {
         try {
             jsonWriter.open();
@@ -322,6 +323,8 @@ public class FantasyApp {
         }
     }
 
+    // EFFECTS: loads the previously saved state of the FantasyApp, otherwise catches IOException exception
+    // if failed to load.
     public void loadState() {
         try {
             theLeague = jsonReader.read();
@@ -336,7 +339,7 @@ public class FantasyApp {
     // EFFECTS: displays the menu of the game
     public void displayMenu() {
 
-        System.out.println("Fantasy Super League Main Menu");
+        System.out.println("\nFantasy Super League Main Menu");
         System.out.println("\nChoose from:");
         System.out.println("\tl ---> View League");
         System.out.println("\tv ---> View Players");

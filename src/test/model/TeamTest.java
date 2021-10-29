@@ -122,6 +122,13 @@ public class TeamTest {
         assertFalse(testTeamTwo.inTeamForGivenPlayer(testSalah));
     }
 
+    @Test
+    public void testSetPointsForTeam() {
+        int i = 3;
+        testTeam.setPointsForTeam(i);
+        assertEquals(3,testTeam.getPoints());
+    }
+
 
 
 }

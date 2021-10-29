@@ -82,8 +82,7 @@ public class JsonReader {
         Integer assists = jsonObject.getInt("Assists");
         Integer points = jsonObject.getInt("Points");
         Player leaguePlayer = new Player(name, position, price);
-        leaguePlayer.points = points - points;
-        //leaguePlayer.getPoints().equals(points);
+        leaguePlayer.setPoints(points - points);
         leaguePlayer.scoredGoal(goals);
         leaguePlayer.scoredAssist(assists);
         lg.addPlayerToLeague(leaguePlayer);
@@ -97,8 +96,7 @@ public class JsonReader {
         Integer teamPoints = jsonObject.getInt("TeamPoints");
         Team leagueTeam = new Team(name);
         addPlayersForLeagueTeam(lg, leagueTeam, jsonObject);
-        leagueTeam.teamPoints = teamPoints;
-        //leagueTeam.getPoints().equals(teamPoints);
+        leagueTeam.setPointsForTeam(teamPoints);
         lg.addTeam(leagueTeam);
     }
 
