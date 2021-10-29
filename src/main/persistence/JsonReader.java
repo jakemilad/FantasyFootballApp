@@ -1,6 +1,5 @@
 package persistence;
 
-import com.sun.tools.internal.xjc.model.Model;
 import model.League;
 import model.Player;
 import model.Team;
