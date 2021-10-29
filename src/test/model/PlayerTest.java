@@ -122,7 +122,7 @@ class PlayerTest {
     }
 
     @Test
-    public void testInTeamForPlayerFlase() {
+    public void testInTeamForPlayerFalse() {
         testTeam.addPlayer(testVirgil);
         testTeam.addPlayer(testNeymar);
         assertFalse(testMessi.inTeamForPlayer());

@@ -5,28 +5,34 @@ import model.Player;
 import model.Team;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import ui.FantasyApp;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
+// Represents a reader that reads a FantasyApp from JSON stored data in files
 public class JsonReader {
 
     private String source;
 
+    // EFFECTS: constructs reader to read from source file
     public JsonReader(String source) {
         this.source = source;
     }
 
+    // EFFECTS: reads the FantasyApp from the file and returns it; throws an IOException
+    // if there is an error while reading the data from the file source.
     public League read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseLeague(jsonObject);
     }
 
+    // EFFECTS: reads the source file as String and returns it.
     public String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
 
@@ -37,74 +43,78 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
+    // EFFECTS: parses a League, denoted as the root of the FantasyApp from JSON Object
+    // and returns it.
     public League parseLeague(JSONObject jsonObject) {
-        String name = jsonObject.getString("name");
         League lg = new League();
         addLeaguePlayers(lg, jsonObject);
         addLeagueTeams(lg, jsonObject);
         return lg;
     }
 
-    public void addLeaguePlayers(League lg, JSONObject jsonObject) {
-        JSONArray jsonArray = jsonObject.getJSONArray("Players");
-
-        for (Object json : jsonArray) {
-            JSONObject nextPlayer = (JSONObject) json;
-            addLeaguePlayer(lg, nextPlayer);
-        }
-    }
-
-    public void addLeaguePlayer(League lg, JSONObject jsonObject) {
-        String name = jsonObject.getString("leaguePlayer Name");
-        String position = jsonObject.getString("leaguePLayer Position");
-        Double price = jsonObject.getDouble("leaguePlayer  price");
-        Integer goals = jsonObject.getInt("leaguePlayer Goals");
-        Integer assists = jsonObject.getInt("leaguePlayer Assists");
-        Integer points = jsonObject.getInt("leaguePlayer Points");
-        Player leaguePlayer = new Player(name, position, price);
-        leaguePlayer.getPoints().equals(points);
-        leaguePlayer.scoredGoal(goals);
-        leaguePlayer.scoredAssist(assists);
-        lg.getPlayersInLeague().add(leaguePlayer);
-
-    }
-
+    // MODIFIES: lg
+    // EFFECTS: parses all league teams from JSON Object and adds them to the league.
     public void addLeagueTeams(League lg, JSONObject jsonObject) {
-        JSONArray jsonArray = new JSONArray("Teams");
-
+        JSONArray jsonArray = jsonObject.getJSONArray("leagueTeams");
         for (Object json : jsonArray) {
             JSONObject nextTeam = (JSONObject) json;
             addLeagueTeam(lg, nextTeam);
         }
     }
 
-    public void addLeagueTeam(League lg, JSONObject jsonObject) {
-        String name = jsonObject.getString("leagueTeam Name");
-        Integer teamPoints = jsonObject.getInt("leagueTeam Points");
-        Team leagueTeam = new Team(name);
-        addPlayersForLeagueTeam(lg, leagueTeam, jsonObject);
-        leagueTeam.getPoints().equals(teamPoints);
-        lg.getTeamsInLeague().add(leagueTeam);
-    }
-
-    public void addPlayersForLeagueTeam(League lg, Team tm, JSONObject jsonObject) {
-        JSONArray jsonArray = jsonObject.getJSONArray("Players for team");
-
+    // MODIFIES: lg
+    // EFFECTS: parses all league players from JSON Object and adds them to the league
+    public void addLeaguePlayers(League lg, JSONObject jsonObject) {
+        JSONArray jsonArray = jsonObject.getJSONArray("leaguePlayers");
         for (Object json : jsonArray) {
-            String nextPlayer = (String) json;
-            //addPlayer(lg,tm,nextPlayer);
+            JSONObject nextPlayer = (JSONObject) json;
+            addLeaguePlayer(lg, nextPlayer);
         }
     }
 
-//    public void addPlayer(League lg, Team tm, String playerName) {
-////        for (Player p : lg.getPlayersInLeague()) {
-////            if (p.getName().equals(playerName)) {
-////                for (Team t : lg.getTeamsInLeague()) {
-////                    if (t.)
-////                }
-////            }
-////        }
-////    }
+    // MODIFIES: lg
+    // EFFECTS: adds all league players as JSON Object data to be parsed
+    public void addLeaguePlayer(League lg, JSONObject jsonObject) {
+        String name = jsonObject.getString("PlayerName");
+        String position = jsonObject.getString("Position");
+        Double price = jsonObject.getDouble("Price");
+        Integer goals = jsonObject.getInt("Goals");
+        Integer assists = jsonObject.getInt("Assists");
+        Integer points = jsonObject.getInt("Points");
+        Player leaguePlayer = new Player(name, position, price);
+        leaguePlayer.points = points;
+        leaguePlayer.scoredGoal(goals);
+        leaguePlayer.scoredAssist(assists);
+        lg.addPlayerToLeague(leaguePlayer);
+    }
 
 
+    // MODIFIES: lg
+    // EFFECTS: adds all league data
+    public void addLeagueTeam(League lg, JSONObject jsonObject) {
+        String name = jsonObject.getString("TeamName");
+        Integer teamPoints = jsonObject.getInt("TeamPoints");
+        Team leagueTeam = new Team(name);
+        addPlayersForLeagueTeam(lg, leagueTeam, jsonObject);
+        leagueTeam.teamPoints = teamPoints;
+        lg.addTeam(leagueTeam);
+    }
+
+    public void addPlayersForLeagueTeam(League lg, Team tm, JSONObject jsonObject) {
+        JSONArray jsonArray = jsonObject.getJSONArray("PlayersInTeam");
+
+        for (Object json : jsonArray) {
+            String nextPlayer = (String) json;
+            addPlayer(lg,tm,nextPlayer);
+        }
+    }
+
+
+    public void addPlayer(League lg, Team tm, String playerName) {
+        for (Player p : lg.getPlayersInLeague()) {
+            if (p.getName().equals(playerName)) {
+                tm.addPlayer(p);
+            }
+        }
+    }
 }

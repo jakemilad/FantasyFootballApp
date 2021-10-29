@@ -10,7 +10,8 @@ public class Player implements Writeable {
     private Double price;         // Players price < 15.0
     private int goals;
     private int assists;
-    protected int points;
+    @SuppressWarnings({"checkstyle:VisibilityModifier", "checkstyle:SuppressWarnings"})
+    public int points;
     private int goalPoints = 2;
     private int assistPoints = 1;
     protected boolean inTeam;
@@ -42,10 +43,6 @@ public class Player implements Writeable {
     // EFFECTS: returns the price of the Player
     public Double getPrice() {
         return this.price;
-    }
-
-    public Integer setGoals(int gl) {
-        return this.goals = gl;
     }
 
     // REQUIRES: goal > 0
@@ -109,7 +106,7 @@ public class Player implements Writeable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("Player Name",name);
+        json.put("PlayerName",name);
         json.put("Position", position);
         json.put("Price", price);
         json.put("Points", points);

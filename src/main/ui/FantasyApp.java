@@ -342,7 +342,7 @@ public class FantasyApp {
         System.out.println("\tv ---> View Players");
         System.out.println("\tc ---> Create Team");
         System.out.println("\ts ---> Save League Standings");
-        System.out.println("\tl ---> Load League Standings");
+        System.out.println("\tp ---> Load League Standings");
         System.out.println("\tq ---> Quit");
 
     }

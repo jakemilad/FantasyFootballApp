@@ -9,7 +9,8 @@ import java.util.ArrayList;
 public class Team implements Writeable {
 
     protected ArrayList<Player> teamPlayers;
-    protected int teamPoints;
+    @SuppressWarnings({"checkstyle:VisibilityModifier", "checkstyle:SuppressWarnings"})
+    public int teamPoints;
     private String name;
 
     // EFFECTS: constructs a team as a list of players and assigned a team name,
@@ -75,9 +76,9 @@ public class Team implements Writeable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("Team Name", name);
-        json.put("Players In Team", teamPlayersToJson());
-        json.put("Team Points", teamPoints);
+        json.put("TeamName", name);
+        json.put("PlayersInTeam", teamPlayersToJson());
+        json.put("TeamPoints", teamPoints);
         return json;
     }
 

@@ -1,11 +1,14 @@
 package persistence;
 
 import model.League;
+import model.Player;
 import model.Team;
 import org.json.JSONArray;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,34 +30,50 @@ public class JsonWriterTest {
     public void testWriterEmptyFantasyApp() {
         try {
             League lg = new League();
-            JsonWriter writer = new JsonWriter("./data/testReaderEmptyFantasyApp.json");
+            JsonWriter writer = new JsonWriter("./data/testWriterEmptyFantasyApp.json");
             writer.open();
             writer.writeLeague(lg);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testReaderEmptyFantasyApp.json");
+            JsonReader reader = new JsonReader("./data/testWriterEmptyFantasyApp.json");
             lg = reader.read();
+            assertEquals(0,lg.lengthOfLeagueTeams());
+            assertEquals(0,lg.lengthOfLeaguePlayers());
+            assertTrue(lg.getPlayersInLeague().isEmpty());
+            assertTrue(lg.getTeamsInLeague().isEmpty());
             assertEquals("The League",lg.getName());
-            assertEquals(0,lg.getTeamsInLeague());
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
     }
 
-//    @Test
-//    public void testReaderEmptyFantasyApp() {
-//        JsonReader reader = new JsonReader("./data/testReaderEmptyFantasyApp.json");
-//        try {
-//            League lg = reader.read();
-//            assertEquals("The League", lg.getName());
-//            Team tm = new Team("Test Team");
-//            assertEquals("The League",lg.getName());
-//            lg.addTeam(tm);
-//            assertEquals(1,lg.lengthOfLeagueTeams());
-//
-//        } catch (IOException e) {
-//            fail("Couldn't read from file");
-//        }
-//    }
+    @Test
+    public void testWriterGeneralFantasyApp() {
+        try {
+            League lg = new League();
+            Team testTeam = new Team("Test Team");
+            Team testTeamTwo = new Team ("Test Team 2");
+            Player pl = new Player("Test Player","MID",50.0);
+            lg.addTeam(testTeam);
+            lg.addTeam(testTeamTwo);
+            lg.addPlayerToLeague(pl);
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneralFantasyApp.json");
+            writer.open();
+            writer.writeLeague(lg);
+            writer.close();
+
+            JsonReader reader = new JsonReader("./data/testWriterGeneralFantasyApp.json");
+            lg = reader.read();
+            assertEquals(1,lg.lengthOfLeaguePlayers());
+            assertEquals(2,lg.lengthOfLeagueTeams());
+            assertFalse(lg.getTeamsInLeague().isEmpty());
+            assertEquals("Test Team",testTeam.getTeamName());
+            assertEquals("The League",lg.getName());
+        } catch (IOException e) {
+            fail("Exception was not expected");
+        }
+    }
+
+
 
 }

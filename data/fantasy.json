@@ -1,101 +1,89 @@
 {
-    "Teams": [
+    "leagueTeams": [{
+        "TeamPoints": 6,
+        "TeamName": "Jake",
+        "PlayersInTeam": ["Messi"]
+    }],
+    "leaguePlayers": [
         {
-            "Points": 4,
-            "Name": "Jake",
-            "Players": ["Messi"]
+            "Points": 6,
+            "Assists": 0,
+            "Position": "ATT",
+            "Price": 15,
+            "PlayerName": "Messi",
+            "Goals": 3
         },
         {
-            "Points": 8,
-            "Name": "Jake2",
-            "Players": ["Ronaldo"]
+            "Points": 0,
+            "Assists": 0,
+            "Position": "ATT",
+            "Price": 15,
+            "PlayerName": "Ronaldo",
+            "Goals": 0
         },
         {
-            "Points": 10,
-            "Name": "Jake3",
-            "Players": ["Salah"]
-        }
-    ],
-    "Players": [
-        {
-            "assists": 0,
-            "price": 15,
-            "name": "Messi",
-            "position": "ATT",
-            "points": 4,
-            "goals": 2
+            "Points": 0,
+            "Assists": 0,
+            "Position": "ATT",
+            "Price": 14.5,
+            "PlayerName": "Salah",
+            "Goals": 0
         },
         {
-            "assists": 0,
-            "price": 15,
-            "name": "Ronaldo",
-            "position": "ATT",
-            "points": 8,
-            "goals": 4
+            "Points": 0,
+            "Assists": 0,
+            "Position": "MID",
+            "Price": 10,
+            "PlayerName": "Kante",
+            "Goals": 0
         },
         {
-            "assists": 0,
-            "price": 14.5,
-            "name": "Salah",
-            "position": "ATT",
-            "points": 10,
-            "goals": 10
+            "Points": 0,
+            "Assists": 0,
+            "Position": "MID",
+            "Price": 13.5,
+            "PlayerName": "Fernandes",
+            "Goals": 0
         },
         {
-            "assists": 0,
-            "price": 10,
-            "name": "Kante",
-            "position": "MID",
-            "points": 0,
-            "goals": 0
+            "Points": 0,
+            "Assists": 0,
+            "Position": "MID",
+            "Price": 14,
+            "PlayerName": "De Bruyne",
+            "Goals": 0
         },
         {
-            "assists": 0,
-            "price": 13.5,
-            "name": "Fernandes",
-            "position": "MID",
-            "points": 0,
-            "goals": 0
+            "Points": 0,
+            "Assists": 0,
+            "Position": "MID",
+            "Price": 11.5,
+            "PlayerName": "Pogba",
+            "Goals": 0
         },
         {
-            "assists": 0,
-            "price": 14,
-            "name": "De Bruyne",
-            "position": "MID",
-            "points": 0,
-            "goals": 0
+            "Points": 0,
+            "Assists": 0,
+            "Position": "DEF",
+            "Price": 12,
+            "PlayerName": "Hernandez",
+            "Goals": 0
         },
         {
-            "assists": 0,
-            "price": 11.5,
-            "name": "Pogba",
-            "position": "MID",
-            "points": 0,
-            "goals": 0
+            "Points": 0,
+            "Assists": 0,
+            "Position": "DEF",
+            "Price": 13,
+            "PlayerName": "Walker",
+            "Goals": 0
         },
         {
-            "assists": 0,
-            "price": 12,
-            "name": "Hernandez",
-            "position": "DEF",
-            "points": 0,
-            "goals": 0
-        },
-        {
-            "assists": 0,
-            "price": 13,
-            "name": "Walker",
-            "position": "DEF",
-            "points": 0,
-            "goals": 0
-        },
-        {
-            "assists": 0,
-            "price": 14.5,
-            "name": "AJ",
-            "position": "MID",
-            "points": 0,
-            "goals": 0
+            "Points": 0,
+            "Assists": 0,
+            "Position": "MID",
+            "Price": 14.5,
+            "PlayerName": "AJ",
+            "Goals": 0
         }
     ]
 }

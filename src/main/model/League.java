@@ -26,28 +26,31 @@ public class League implements Writeable {
 
     // EFFECTS: gets all teams in the league
     public ArrayList<Team> getTeamsInLeague() {
-        return this.leagueTeams;
+        return leagueTeams;
     }
 
     // EFFECTS: gets all the players in the league
     public ArrayList<Player> getPlayersInLeague() {
-        return this.leaguePlayers;
+        return leaguePlayers;
     }
 
     // EFFECTS: adds a Team to the league
     public void addTeam(Team t) {
-        leagueTeams.add(t);
+        if (!leagueTeams.contains(t)) {
+            leagueTeams.add(t);
+        }
     }
-
 
     // EFFECTS: removes a team from the league
     public void removeTeam(Team t) {
         leagueTeams.remove(t);
     }
 
-
+    // EFFECTS: adds a Player to the league
     public void addPlayerToLeague(Player p) {
-        leaguePlayers.add(p);
+        if (!leaguePlayers.contains(p)) {
+            leaguePlayers.add(p);
+        }
     }
 
     // EFFECTS: returns the number of teams in the league,
@@ -67,11 +70,12 @@ public class League implements Writeable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("Teams", leagueTeamToJson());
-        json.put("Players", leaguePlayersToJson());
+        json.put("leagueTeams", leagueTeamToJson());
+        json.put("leaguePlayers", leaguePlayersToJson());
         return json;
     }
 
+    // EFFECTS: returns all league teams as a JSON Array
     private JSONArray leagueTeamToJson() {
         JSONArray jsonArray = new JSONArray();
 
@@ -82,7 +86,7 @@ public class League implements Writeable {
     }
 
 
-
+    // EFFECTS: returns all league players as a JSON Array
     private JSONArray leaguePlayersToJson() {
         JSONArray jsonArray = new JSONArray();
 
