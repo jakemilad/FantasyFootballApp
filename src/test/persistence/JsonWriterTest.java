@@ -71,6 +71,6 @@ public class JsonWriterTest {
         }
     }
 
-
-
 }
+
+// SOURCES: WorkRoomApp Json demo project was used to test the JsonWriter.

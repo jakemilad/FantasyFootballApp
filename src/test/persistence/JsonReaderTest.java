@@ -66,7 +66,5 @@ public class JsonReaderTest {
         }
     }
 
-
-
-
 }
+// SOURCES: WorkRoomApp Json demo project was used to test the JsonReader.

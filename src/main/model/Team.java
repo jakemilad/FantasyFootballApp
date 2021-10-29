@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class Team implements Writeable {
 
     protected ArrayList<Player> teamPlayers;
-    @SuppressWarnings({"checkstyle:VisibilityModifier", "checkstyle:SuppressWarnings"})
     public int teamPoints;
     private String name;
 

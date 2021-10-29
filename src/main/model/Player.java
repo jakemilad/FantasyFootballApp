@@ -10,7 +10,6 @@ public class Player implements Writeable {
     private Double price;         // Players price < 15.0
     private int goals;
     private int assists;
-    @SuppressWarnings({"checkstyle:VisibilityModifier", "checkstyle:SuppressWarnings"})
     public int points;
     private int goalPoints = 2;
     private int assistPoints = 1;
@@ -65,7 +64,7 @@ public class Player implements Writeable {
 
     // EFFECTS: returns the number of points a player has accumulated
     public Integer getPoints() {
-        return this.points;
+        return points;
     }
 
     // EFFECTS: returns the number of goals a player has scored

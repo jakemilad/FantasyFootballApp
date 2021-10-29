@@ -1,5 +1,6 @@
 package persistence;
 
+import com.sun.tools.internal.xjc.model.Model;
 import model.League;
 import model.Player;
 import model.Team;
@@ -82,6 +83,7 @@ public class JsonReader {
         Integer points = jsonObject.getInt("Points");
         Player leaguePlayer = new Player(name, position, price);
         leaguePlayer.points = points - points;
+        //leaguePlayer.getPoints().equals(points);
         leaguePlayer.scoredGoal(goals);
         leaguePlayer.scoredAssist(assists);
         lg.addPlayerToLeague(leaguePlayer);
@@ -96,6 +98,7 @@ public class JsonReader {
         Team leagueTeam = new Team(name);
         addPlayersForLeagueTeam(lg, leagueTeam, jsonObject);
         leagueTeam.teamPoints = teamPoints;
+        //leagueTeam.getPoints().equals(teamPoints);
         lg.addTeam(leagueTeam);
     }
 
@@ -121,3 +124,5 @@ public class JsonReader {
         }
     }
 }
+
+// SOURCES: WorkRoomApp Json demo project was used to implement the JsonReader.

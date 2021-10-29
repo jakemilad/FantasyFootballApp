@@ -44,3 +44,5 @@ public class JsonWriter {
         writer.print(json);
     }
 }
+
+// SOURCES: WorkRoomApp Json demo project was used to implement the JsonWriter.
