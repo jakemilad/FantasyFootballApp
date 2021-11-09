@@ -3,6 +3,7 @@ package model;
 import org.json.JSONObject;
 import persistence.Writeable;
 
+// Modeling the specification of a Player in a Fantasy Football Application.
 public class Player implements Writeable {
 
     private String name;          // Players name

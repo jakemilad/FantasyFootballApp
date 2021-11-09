@@ -4,9 +4,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writeable;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
-public class League implements Writeable {
+// Modeling the specification of a League in a Fantasy Football Application.
+public class League extends JPanel implements Writeable {
 
     private ArrayList<Team> leagueTeams;
     private ArrayList<Player> leaguePlayers;

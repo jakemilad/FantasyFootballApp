@@ -6,6 +6,7 @@ import persistence.Writeable;
 
 import java.util.ArrayList;
 
+// Modeling the specification of a Player in a Fantasy Football Application.
 public class Team implements Writeable {
 
     protected ArrayList<Player> teamPlayers;

@@ -26,6 +26,12 @@ public class FantasyApp {
     private Player hernandez = new Player("Hernandez", "DEF", 12.0);
     private Player walker = new Player("Walker", "DEF", 13.0);
     private Player jaitly = new Player("Jaitly", "MID", 14.5);
+    private Player davies = new Player("Davies", "DEF", 11.0);
+    private Player ramos = new Player("Ramos", "MID", 8.5);
+    private Player emile = new Player("Emile", "MID", 9.0);
+    private Player neuer = new Player("Neuer", "DEF", 13.0);
+    private Player oblak = new Player("Oblak", "DEF", 13.0);
+    private Player neymar = new Player("Neymar", "ATT", 15.0);
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
     private static final String JSON_STORE = "./data/fantasy.json";
@@ -57,6 +63,12 @@ public class FantasyApp {
         allPlayers.add(hernandez);
         allPlayers.add(walker);
         allPlayers.add(jaitly);
+        allPlayers.add(davies);
+        allPlayers.add(neuer);
+        allPlayers.add(neymar);
+        allPlayers.add(emile);
+        allPlayers.add(ramos);
+        allPlayers.add(oblak);
         input = new Scanner(System.in);
     }
 
@@ -222,9 +234,8 @@ public class FantasyApp {
     }
 
 
-    // REQUIRES: player name to be a valid player that exists in the initialized set of players.
-    // EFFECTS: if the player is in a team, accumulate points for the player and subsequently the team
-    // they are assigned to, otherwise, accumulate points for players.
+    // EFFECTS: displays menu to create a team which is added to the league, displays menu to configure
+    // the team.
     public void createTeam() {
         String createCommand = "";
         System.out.println("\n Enter Team Name");
@@ -243,7 +254,7 @@ public class FantasyApp {
 
     }
 
-    // EFFECTS: displays menu for all the configurations possible for a team,
+    // EFFECTS: displays menu for all the configurations possible for a team.
     public void teamConfiguration() {
         String teamCommand = "";
         System.out.println("a ---> Add a Player to your team");
@@ -266,7 +277,7 @@ public class FantasyApp {
     }
 
     // EFFECTS: prints the list of all players; if the player is not already in the inputted team,
-    // add the player into the  team, otherwise else print the given statement.
+    // add the player into the  team, otherwise print the given statement.
     public void addPlayerToTeam() {
         if (!(allPlayers).isEmpty()) {
             for (Player playa : allPlayers) {
