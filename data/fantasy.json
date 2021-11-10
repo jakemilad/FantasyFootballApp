@@ -1,24 +1,17 @@
 {
-    "leagueTeams": [
-        {
-            "TeamPoints": 0,
-            "TeamName": "Jake",
-            "PlayersInTeam": ["Messi"]
-        },
-        {
-            "TeamPoints": 0,
-            "TeamName": "b",
-            "PlayersInTeam": ["Ronaldo"]
-        }
-    ],
+    "leagueTeams": [{
+        "TeamPoints": 5,
+        "TeamName": "Jake",
+        "PlayersInTeam": ["Messi"]
+    }],
     "leaguePlayers": [
         {
-            "Points": 0,
+            "Points": 5,
             "Assists": 0,
             "Position": "ATT",
             "Price": 15,
             "PlayerName": "Messi",
-            "Goals": 0
+            "Goals": 5
         },
         {
             "Points": 0,
@@ -37,8 +30,8 @@
             "Goals": 0
         },
         {
-            "Points": 0,
-            "Assists": 0,
+            "Points": 1,
+            "Assists": 1,
             "Position": "MID",
             "Price": 10,
             "PlayerName": "Kante",
@@ -53,8 +46,8 @@
             "Goals": 0
         },
         {
-            "Points": 0,
-            "Assists": 0,
+            "Points": 2,
+            "Assists": 2,
             "Position": "MID",
             "Price": 14,
             "PlayerName": "De Bruyne",
@@ -66,6 +59,62 @@
             "Position": "MID",
             "Price": 11.5,
             "PlayerName": "Pogba",
+            "Goals": 0
+        },
+        {
+            "Points": 0,
+            "Assists": 0,
+            "Position": "DEF",
+            "Price": 11,
+            "PlayerName": "Davies",
+            "Goals": 0
+        },
+        {
+            "Points": 0,
+            "Assists": 0,
+            "Position": "MID",
+            "Price": 14.5,
+            "PlayerName": "Jaitly",
+            "Goals": 0
+        },
+        {
+            "Points": 0,
+            "Assists": 0,
+            "Position": "ATT",
+            "Price": 15,
+            "PlayerName": "Ronaldo",
+            "Goals": 0
+        },
+        {
+            "Points": 0,
+            "Assists": 0,
+            "Position": "MID",
+            "Price": 9,
+            "PlayerName": "Emile",
+            "Goals": 0
+        },
+        {
+            "Points": 0,
+            "Assists": 0,
+            "Position": "DEF",
+            "Price": 13,
+            "PlayerName": "Neuer",
+            "Goals": 0
+        },
+        {
+            "Points": 0,
+            "Assists": 0,
+            "Position": "DEF",
+            "Price": 13,
+            "PlayerName": "Oblak",
+            "Goals": 0
+        },
+        {
+            "Points": 0,
+            "Assists": 0,
+            "Position": "ATT",
+            "Price": 15,
+            "PlayerName": "Neymar",
             "Goals": 0
         },
         {
@@ -88,8 +137,56 @@
             "Points": 0,
             "Assists": 0,
             "Position": "MID",
-            "Price": 14.5,
-            "PlayerName": "Jaitly",
+            "Price": 8.5,
+            "PlayerName": "Ramos",
+            "Goals": 0
+        },
+        {
+            "Points": 0,
+            "Assists": 0,
+            "Position": "ATT",
+            "Price": 13,
+            "PlayerName": "Benzema",
+            "Goals": 0
+        },
+        {
+            "Points": 0,
+            "Assists": 0,
+            "Position": "MID",
+            "Price": 8.5,
+            "PlayerName": "Saka",
+            "Goals": 0
+        },
+        {
+            "Points": 0,
+            "Assists": 0,
+            "Position": "ATT",
+            "Price": 12,
+            "PlayerName": "Mbappe",
+            "Goals": 0
+        },
+        {
+            "Points": 0,
+            "Assists": 0,
+            "Position": "ATT",
+            "Price": 7,
+            "PlayerName": "Antonio",
+            "Goals": 0
+        },
+        {
+            "Points": 0,
+            "Assists": 0,
+            "Position": "ATT",
+            "Price": 11,
+            "PlayerName": "Mane",
+            "Goals": 0
+        },
+        {
+            "Points": 0,
+            "Assists": 0,
+            "Position": "ATT",
+            "Price": 12.5,
+            "PlayerName": "Kane",
             "Goals": 0
         }
     ]

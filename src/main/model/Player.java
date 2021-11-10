@@ -107,7 +107,7 @@ public class Player implements Writeable {
 
     // EFFECTS: returns true if the player is in a team
     public boolean inTeamForPlayer() {
-        return this.inTeam;
+        return inTeam;
     }
 
     @Override

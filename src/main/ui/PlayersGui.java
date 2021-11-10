@@ -4,42 +4,23 @@ import model.League;
 import model.Player;
 import model.Team;
 
-import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import java.awt.*;
 
 public class PlayersGui extends AbstractTableModel {
 
     private League league;
 
-    public PlayersGui(League lg) {
-        this.league = lg;
-        showWindow();
-    }
-
-    public void showWindow() {
-        JFrame frame = new JFrame("All Players");
-        frame.setLayout(new BorderLayout(30, 30));
-        frame.setMinimumSize(new Dimension(400, 400));
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        frame.pack();
-
-        JPanel playerPanel = new JPanel();
-        playerPanel.setVisible(true);
-        playerPanel.setLayout(new BoxLayout(playerPanel, BoxLayout.Y_AXIS));
-        //playerPanel.setBackground(Color.orange);
-
-        frame.add(playerPanel);
-    }
-
-    public final String[] columnNames = new String[]{
+    private final String[] columnNames = new String[]{
             "Name", "Position", "Price", "Goals", "Assists", "Points"
     };
 
-    public final Class[] columnClass = new Class[]{
+    private final Class[] columnClass = new Class[]{
             String.class, String.class, Double.class, Integer.class, Integer.class, Integer.class
     };
+
+    public PlayersGui(League lg) {
+        this.league = lg;
+    }
 
     public void updateLeagueStatistics(League league) {
         this.league = league;
@@ -85,6 +66,7 @@ public class PlayersGui extends AbstractTableModel {
         return null;
     }
 
+
     @Override
     public void setValueAt(Object val, int rowIndex, int columnIndex) {
         Player player = league.getPlayersInLeague().get(rowIndex);
@@ -111,5 +93,9 @@ public class PlayersGui extends AbstractTableModel {
         }
     }
 
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return true;
+    }
 
 }

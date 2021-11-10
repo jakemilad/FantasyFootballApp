@@ -11,12 +11,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class FantasyAppGui extends JFrame implements ActionListener {
 
     // Initialize data fields
-    private League theLeague;
+    private League guiLeague = new League();
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
     private static final String JSON_STORE = "./data/fantasy.json";
@@ -40,19 +41,38 @@ public class FantasyAppGui extends JFrame implements ActionListener {
     private Player neuer = new Player("Neuer", "DEF", 13.0);
     private Player oblak = new Player("Oblak", "DEF", 13.0);
     private Player neymar = new Player("Neymar", "ATT", 15.0);
+    private Player benzema = new Player("Benzema","ATT",13.0);
+    private Player saka = new Player("Saka","MID",8.5);
+    private Player kane = new Player("Kane","ATT",12.5);
+    private Player mbappe = new Player("Mbappe","ATT",12.0);
+    private Player mane = new Player("Mane","ATT",11.0);
+    private Player antonio = new Player("Antonio","ATT",7.0);
     // Initialize graphics fields
     protected static final int WIDTH = 900;
     protected static final int HEIGHT = 650;
-    private JFrame mainFrame = new JFrame("Super League Fantasy App");
+    // JFrames
+    private JFrame mainFrame;
+    private JFrame createTeamFrame;
+    private JFrame viewPlayersFrame;
+    private JFrame viewLeagueFrame;
     // JPanels
     private JPanel menuPanel = new JPanel();
-    private JSplitPane mainPane = new JSplitPane();
+    private JPanel viewPlayersPanel;
+    private JPanel createTeamPanel;
+    private JPanel addPlayerToTeamPanel;
+    private JPanel viewLeaguePanel;
+    private JSplitPane viewPlayersSplitPane;
     // JLabels
     private JLabel menuLabel = new JLabel("Welcome to Fantasy Super League");
     private JLabel teamNameLabel;
     private JLabel teamCreatedSuccessfully;
+    private JLabel addPlayerToTeam;
+    private JLabel playerAddedSuccessfully;
+    private JLabel addPlayerToWhichTeam;
     // JTexts
     private JTextField teamNameText;
+    private JTextField addPlayerText;
+    private JTextField addPlayerToTeamText;
     // JButtons
     private JButton viewLeagueGui;
     private JButton viewPlayersGui;
@@ -60,11 +80,13 @@ public class FantasyAppGui extends JFrame implements ActionListener {
     private JButton saveStateGui;
     private JButton loadStateGui;
     private JButton completeCreateTeam;
+    private JButton completeAddPlayer;
     // Gui models
-    private PlayersGui viewPlayers;
+    private PlayersGui allPlayersToView;
+    private TeamsGui allTeamsInLeague;
     // JTables
     private JTable viewPlayersTable;
-
+    private JTable allTeamsTable;
 
 
     public FantasyAppGui() throws FileNotFoundException {
@@ -74,9 +96,8 @@ public class FantasyAppGui extends JFrame implements ActionListener {
     }
 
     public void initializeData() {
-        theLeague = new League();
-        allPlayersGui = theLeague.getPlayersInLeague();
-        allTeamsGui = theLeague.getTeamsInLeague();
+        allPlayersGui = guiLeague.getPlayersInLeague();
+        allTeamsGui = guiLeague.getTeamsInLeague();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         addAllPlayers();
@@ -100,11 +121,17 @@ public class FantasyAppGui extends JFrame implements ActionListener {
         allPlayersGui.add(hernandez);
         allPlayersGui.add(walker);
         allPlayersGui.add(ramos);
+        allPlayersGui.add(benzema);
+        allPlayersGui.add(saka);
+        allPlayersGui.add(mbappe);
+        allPlayersGui.add(antonio);
+        allPlayersGui.add(mane);
+        allPlayersGui.add(kane);
     }
 
 
-    //TODO: this
     public void initializeGraphics() {
+        mainFrame = new JFrame("Super League Fantasy App");
         mainFrame.setLayout(new BorderLayout(30,30));
         mainFrame.setMinimumSize(new Dimension(WIDTH,HEIGHT));
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -117,12 +144,13 @@ public class FantasyAppGui extends JFrame implements ActionListener {
 
 
     public void createMenu() {
-        menuLabel.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+        menuLabel.setFont(new Font("Times New Roman", Font.PLAIN, 33));
         menuLabel.setBorder(BorderFactory.createEmptyBorder(300,200,300,200));
 
         menuPanel.setLayout(new GridLayout(0, 1));
         menuPanel.setSize(new Dimension(3, 3));
         menuPanel.setBorder(BorderFactory.createEmptyBorder(120, 80, 120, 80));
+        //menuPanel.setBorder(BorderFactory.createMatteBorder(15,15,15,15,Color.BLACK));
         menuPanel.setBackground(Color.GRAY);
         menuPanel.add(menuLabel);
         add(menuPanel, BorderLayout.CENTER);
@@ -172,32 +200,149 @@ public class FantasyAppGui extends JFrame implements ActionListener {
             pressLoadState();
         } else if (source == completeCreateTeam) {
             completeCreateTeamButton();
+        } else if (source == completeAddPlayer) {
+            completeAddPlayerButton();
         }
     }
 
     private void pressViewPlayers() {
-        JFrame viewPlayersFrame = new JFrame();
-        viewPlayersFrame.setPreferredSize(new Dimension(500,700));
+        viewPlayersFrame = new JFrame();
+        viewPlayersFrame.setPreferredSize(new Dimension(500,800));
         viewPlayersFrame.setTitle("All Players");
-        viewPlayersFrame.setLocationRelativeTo(menuPanel);
+        viewPlayersFrame.setLocation(450,100);
+
+        viewPlayersSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+        viewPlayersSplitPane.setMinimumSize(new Dimension(500,800));
+
+        viewPlayersPanel = new JPanel();
+        viewPlayersPanel.setSize(new Dimension(500,800));
+        viewPlayersPanel.setBackground(Color.lightGray);
+        viewPlayersPanel.setBorder(BorderFactory.createMatteBorder(10,10,10,10,Color.black));
+
+        setPlayerGuiModel();
+        setAddPlayerToTeam();
+
+        completeAddPlayer.addActionListener(this::actionPerformed);
+
+        viewPlayersSplitPane.setTopComponent(viewPlayersPanel);
+        viewPlayersSplitPane.setBottomComponent(addPlayerToTeamPanel);
+
+        viewPlayersFrame.add(viewPlayersSplitPane);
+        viewPlayersFrame.setVisible(true);
+        viewPlayersFrame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        viewPlayersFrame.pack();
     }
 
-    private void pressLoadState() {
+
+    public void setPlayerGuiModel() {
+        allPlayersToView = new PlayersGui(guiLeague);
+        viewPlayersTable = new JTable(allPlayersToView);
+        viewPlayersTable.setBackground(Color.gray);
+        viewPlayersTable.setFillsViewportHeight(true);
+        viewPlayersPanel.add(new JScrollPane(viewPlayersTable));
+    }
+
+    public void setAddPlayerToTeam() {
+        addPlayerToTeamPanel = new JPanel();
+        addPlayerToTeamPanel.setSize(250,350);
+        addPlayerToTeamPanel.setBackground(Color.lightGray);
+        addPlayerToTeamPanel.setBorder(BorderFactory.createMatteBorder(10,10,10,10,Color.black));
+
+        addPlayerToTeam = new JLabel("Which player do you want to add?");
+        addPlayerText = new JTextField(20);
+        addPlayerToTeam.setBounds(100, 20, 300, 30);
+        addPlayerText.setBounds(100,50,300,30);
+
+        addPlayerToWhichTeam = new JLabel("Which team do you want to add it to?");
+        addPlayerToTeamText = new JTextField(20);
+        addPlayerToWhichTeam.setBounds(100,80,300,30);
+        addPlayerToTeamText.setBounds(100,110,300,30);
+
+        playerAddedSuccessfully = new JLabel("");
+        playerAddedSuccessfully.setBounds(150,200,300,30);
+
+        completeAddPlayer = new JButton("Add Player to Team");
+        completeAddPlayer.setBounds(100, 160, 300, 30);
+
+        addPlayerToTeamPanel.setLayout(null);
+        addPlayerToTeamPanel.add(addPlayerToTeam);
+        addPlayerToTeamPanel.add(addPlayerText);
+        addPlayerToTeamPanel.add(addPlayerToWhichTeam);
+        addPlayerToTeamPanel.add(addPlayerToTeamText);
+        addPlayerToTeamPanel.add(playerAddedSuccessfully);
+        addPlayerToTeamPanel.add(completeAddPlayer);
+    }
+
+    public void completeAddPlayerButton() {
+        String playerName = addPlayerText.getText();
+        String teamName = addPlayerToTeamText.getText();
+
+        for (Player p : allPlayersGui) {
+            for (Team t : allTeamsGui) {
+                if ((p.getName().equals(playerName)) && (t.getTeamName().equals(teamName))) {
+                    if ((!(t.inTeamForGivenPlayer(p)))) {
+                        t.addPlayer(p);
+                        playerAddedSuccessfully.setText("Player Added to Team Successfully");
+                    } else {
+                        playerAddedSuccessfully.setText("Unable to Add Player to Team");
+                    }
+                }
+            }
+        }
     }
 
     private void pressSaveState() {
+        try {
+            jsonWriter.open();
+            jsonWriter.writeLeague(guiLeague);
+            jsonWriter.close();
+            System.out.println("Saved league to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to save league to " + JSON_STORE);
+        }
+    }
+
+    private void pressLoadState() {
+        try {
+            System.out.println("Loading...");
+            guiLeague = jsonReader.read();
+            allPlayersGui = guiLeague.getPlayersInLeague();
+            allTeamsGui = guiLeague.getTeamsInLeague();
+            allPlayersToView.updateLeagueStatistics(guiLeague);
+            allTeamsInLeague.updateLeague(guiLeague);
+        } catch (IOException e) {
+            System.out.println("Unable to load data from " + JSON_STORE);
+        }
     }
 
     public void pressCreateTeam() {
-        JFrame createTeamFrame = new JFrame();
+        createTeamFrame = new JFrame();
         createTeamFrame.setPreferredSize(new Dimension(300,200));
         createTeamFrame.setTitle("Create new Team");
         createTeamFrame.setLocationRelativeTo(menuPanel);
 
-        JPanel createTeamPanel = new JPanel();
+        createTeamPanel = new JPanel();
         createTeamPanel.setBackground(Color.lightGray);
         createTeamPanel.setBorder(BorderFactory.createMatteBorder(15,15,15,15,Color.BLACK));
 
+        createTeamLabelTextButton();
+
+        teamCreatedSuccessfully = new JLabel("");
+
+        completeCreateTeam.addActionListener(this::actionPerformed);
+
+        createTeamPanel.add(teamNameLabel);
+        createTeamPanel.add(teamNameText);
+        createTeamPanel.add(completeCreateTeam);
+        createTeamPanel.add(teamCreatedSuccessfully);
+
+        createTeamFrame.add(createTeamPanel);
+        createTeamFrame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        createTeamFrame.setVisible(true);
+        createTeamFrame.pack();
+    }
+
+    public void createTeamLabelTextButton() {
         teamNameLabel = new JLabel("Enter Team Name:");
         teamNameLabel.setBounds(80,40,200,50);
 
@@ -206,29 +351,37 @@ public class FantasyAppGui extends JFrame implements ActionListener {
 
         completeCreateTeam = new JButton("Add Team to League");
         completeCreateTeam.setBounds(100,150,150,70);
-
-        teamCreatedSuccessfully = new JLabel("");
-
-        completeCreateTeam.addActionListener(this::actionPerformed);
-
-        createTeamPanel.add(teamNameLabel);
-        createTeamPanel.add(teamNameText);
-        createTeamPanel.add(teamCreatedSuccessfully);
-        createTeamPanel.add(completeCreateTeam);
-
-        createTeamFrame.add(createTeamPanel);
-        createTeamFrame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        createTeamFrame.setVisible(true);
-        createTeamFrame.pack();
     }
 
     public void completeCreateTeamButton() {
         String input = teamNameText.getText();
         allTeamsGui.add(new Team(input));
-        teamCreatedSuccessfully.setText("Team successfully added to league");
+        teamCreatedSuccessfully.setText("Team Successfully Added to the League");
     }
 
     private void pressViewLeague() {
+        viewLeagueFrame = new JFrame();
+        viewLeagueFrame.setPreferredSize(new Dimension(500,700));
+        viewLeagueFrame.setTitle("League Table");
+        viewLeagueFrame.setLocation(450,100);
+
+        viewLeaguePanel = new JPanel();
+        viewLeaguePanel.setBorder(BorderFactory.createMatteBorder(10,10,10,10,Color.BLACK));
+
+        setViewLeagueTable();
+
+        viewLeagueFrame.add(viewLeaguePanel);
+        viewLeagueFrame.setVisible(true);
+        viewLeagueFrame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        viewLeagueFrame.pack();
+    }
+
+    private void setViewLeagueTable() {
+        allTeamsInLeague = new TeamsGui(guiLeague);
+        allTeamsTable = new JTable(allTeamsInLeague);
+        allTeamsTable.setBackground(Color.lightGray);
+        allTeamsTable.setFillsViewportHeight(true);
+        viewLeaguePanel.add(new JScrollPane(allTeamsTable));
     }
 
 }
