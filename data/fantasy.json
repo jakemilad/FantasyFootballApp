@@ -1,37 +1,49 @@
 {
-    "leagueTeams": [{
-        "TeamPoints": 5,
-        "TeamName": "Jake",
-        "PlayersInTeam": ["Messi"]
-    }],
+    "leagueTeams": [
+        {
+            "TeamPoints": 4,
+            "TeamName": "Jake",
+            "PlayersInTeam": ["Messi"]
+        },
+        {
+            "TeamPoints": 6,
+            "TeamName": "Al",
+            "PlayersInTeam": ["Ronaldo"]
+        },
+        {
+            "TeamPoints": 8,
+            "TeamName": "Riley",
+            "PlayersInTeam": ["Salah"]
+        }
+    ],
     "leaguePlayers": [
         {
-            "Points": 5,
+            "Points": 4,
             "Assists": 0,
             "Position": "ATT",
             "Price": 15,
             "PlayerName": "Messi",
-            "Goals": 5
+            "Goals": 2
         },
         {
-            "Points": 0,
+            "Points": 6,
             "Assists": 0,
             "Position": "ATT",
             "Price": 15,
             "PlayerName": "Ronaldo",
-            "Goals": 0
+            "Goals": 3
         },
         {
-            "Points": 0,
+            "Points": 8,
             "Assists": 0,
             "Position": "ATT",
             "Price": 14.5,
             "PlayerName": "Salah",
-            "Goals": 0
+            "Goals": 4
         },
         {
-            "Points": 1,
-            "Assists": 1,
+            "Points": 0,
+            "Assists": 0,
             "Position": "MID",
             "Price": 10,
             "PlayerName": "Kante",
@@ -46,8 +58,8 @@
             "Goals": 0
         },
         {
-            "Points": 2,
-            "Assists": 2,
+            "Points": 0,
+            "Assists": 0,
             "Position": "MID",
             "Price": 14,
             "PlayerName": "De Bruyne",
@@ -75,14 +87,6 @@
             "Position": "MID",
             "Price": 14.5,
             "PlayerName": "Jaitly",
-            "Goals": 0
-        },
-        {
-            "Points": 0,
-            "Assists": 0,
-            "Position": "ATT",
-            "Price": 15,
-            "PlayerName": "Ronaldo",
             "Goals": 0
         },
         {

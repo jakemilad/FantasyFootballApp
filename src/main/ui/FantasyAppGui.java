@@ -6,10 +6,13 @@ import model.Team;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -55,6 +58,7 @@ public class FantasyAppGui extends JFrame implements ActionListener {
     private JFrame createTeamFrame;
     private JFrame viewPlayersFrame;
     private JFrame viewLeagueFrame;
+    private JFrame mesiFrame;
     // JPanels
     private JPanel menuPanel = new JPanel();
     private JPanel viewPlayersPanel;
@@ -62,13 +66,15 @@ public class FantasyAppGui extends JFrame implements ActionListener {
     private JPanel addPlayerToTeamPanel;
     private JPanel viewLeaguePanel;
     private JSplitPane viewPlayersSplitPane;
+    private JPanel mesiPanel;
     // JLabels
-    private JLabel menuLabel = new JLabel("Welcome to Fantasy Super League");
+    private JLabel menuLabel = new JLabel("Fantasy Super League");
     private JLabel teamNameLabel;
     private JLabel teamCreatedSuccessfully;
     private JLabel addPlayerToTeam;
     private JLabel playerAddedSuccessfully;
     private JLabel addPlayerToWhichTeam;
+    private JLabel mesiLabel;
     // JTexts
     private JTextField teamNameText;
     private JTextField addPlayerText;
@@ -81,20 +87,26 @@ public class FantasyAppGui extends JFrame implements ActionListener {
     private JButton loadStateGui;
     private JButton completeCreateTeam;
     private JButton completeAddPlayer;
+    private JButton mesiButton;
     // Gui models
     private PlayersGui allPlayersToView;
     private TeamsGui allTeamsInLeague;
     // JTables
     private JTable viewPlayersTable;
     private JTable allTeamsTable;
+    // Images
+    private BufferedImage mesiImage;
 
 
+    // EFFECTS: Fantasy App constructor that initializes all data and graphics.
     public FantasyAppGui() throws FileNotFoundException {
         super("Super League Fantasy App");
         initializeData();
         initializeGraphics();
     }
 
+    // EFFECTS: Initializes the data structure for players and teams and assigns JsonWriter and JsonReader
+    // a destination for storing data.
     public void initializeData() {
         allPlayersGui = guiLeague.getPlayersInLeague();
         allTeamsGui = guiLeague.getTeamsInLeague();
@@ -103,6 +115,8 @@ public class FantasyAppGui extends JFrame implements ActionListener {
         addAllPlayers();
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds all Player objects to the list of Players in the game.
     public void addAllPlayers() {
         allPlayersGui.add(messi);
         allPlayersGui.add(ronaldo);
@@ -113,7 +127,6 @@ public class FantasyAppGui extends JFrame implements ActionListener {
         allPlayersGui.add(pogba);
         allPlayersGui.add(davies);
         allPlayersGui.add(jaitly);
-        allPlayersGui.add(ronaldo);
         allPlayersGui.add(emile);
         allPlayersGui.add(neuer);
         allPlayersGui.add(oblak);
@@ -130,6 +143,7 @@ public class FantasyAppGui extends JFrame implements ActionListener {
     }
 
 
+    // EFFECTS: initializes the main JFrame and main menu panel of the Fantasy App
     public void initializeGraphics() {
         mainFrame = new JFrame("Super League Fantasy App");
         mainFrame.setLayout(new BorderLayout(30,30));
@@ -143,22 +157,48 @@ public class FantasyAppGui extends JFrame implements ActionListener {
     }
 
 
+    // EFFECTS: reads imported image in data folder to be added as a component to JPanel
+    public void mesiImage() {
+        try {
+            mesiImage = ImageIO.read(new File("./data/mesi.jpeg"));
+            mesiLabel = new JLabel(new ImageIcon(mesiImage));
+
+            mesiFrame = new JFrame();
+            mesiFrame.setTitle("ankara mesi");
+            mesiFrame.setPreferredSize(new Dimension(500,400));
+            mesiFrame.setLocation(450,100);
+
+            mesiPanel = new JPanel();
+            mesiPanel.add(mesiLabel);
+            mesiPanel.setBackground(Color.lightGray);
+            mesiPanel.setBorder(BorderFactory.createMatteBorder(10,10,10,10,Color.BLACK));
+
+            mesiFrame.add(mesiPanel);
+
+            mesiFrame.setVisible(true);
+            mesiFrame.pack();
+            mesiFrame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        } catch (IOException e) {
+            System.out.println("nothing here");
+        }
+    }
+
+
+    // EFFECTS: Initializes panel of the main menu of the Fantasy App.
     public void createMenu() {
-        menuLabel.setFont(new Font("Times New Roman", Font.PLAIN, 33));
+        menuLabel.setFont(new Font("Serif", Font.BOLD, 40));
         menuLabel.setBorder(BorderFactory.createEmptyBorder(300,200,300,200));
 
         menuPanel.setLayout(new GridLayout(0, 1));
-        menuPanel.setSize(new Dimension(3, 3));
-        menuPanel.setBorder(BorderFactory.createEmptyBorder(120, 80, 120, 80));
-        //menuPanel.setBorder(BorderFactory.createMatteBorder(15,15,15,15,Color.BLACK));
+        menuPanel.setBorder(BorderFactory.createEmptyBorder(100, 60, 100, 60));
         menuPanel.setBackground(Color.GRAY);
         menuPanel.add(menuLabel);
-        add(menuPanel, BorderLayout.CENTER);
+        mainFrame.add(menuPanel, BorderLayout.CENTER);
 
         initializeButtonPanels();
     }
 
-
+    // EFFECTS: Initializes the all the main menu buttons to press
     public void initializeButtonPanels() {
         viewLeagueGui = new JButton("View League");
         menuPanel.add(viewLeagueGui);
@@ -179,14 +219,22 @@ public class FantasyAppGui extends JFrame implements ActionListener {
         loadStateGui = new JButton("Load Team");
         menuPanel.add(loadStateGui);
         loadStateGui.addActionListener(this::actionPerformed);
+
+        mesiButton = new JButton("mesi");
+        menuPanel.add(mesiButton);
+        mesiButton.addActionListener(this::actionPerformed);
     }
 
+
+    // EFFECTS: overrides action listener method to initialize button functionality
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         buttonOptions(source);
     }
 
+    // MODIFIES: this, ActionEvent
+    // EFFECTS: sets calls to correspond to the
     public void buttonOptions(Object source) {
         if (source == viewLeagueGui) {
             pressViewLeague();
@@ -202,9 +250,14 @@ public class FantasyAppGui extends JFrame implements ActionListener {
             completeCreateTeamButton();
         } else if (source == completeAddPlayer) {
             completeAddPlayerButton();
+        } else if (source == mesiButton) {
+            mesiImage();
         }
     }
 
+
+    // MODIFIES: this
+    // EFFECTS: initializes the functionality of viewing players for two split panels.
     private void pressViewPlayers() {
         viewPlayersFrame = new JFrame();
         viewPlayersFrame.setPreferredSize(new Dimension(500,800));
@@ -233,15 +286,19 @@ public class FantasyAppGui extends JFrame implements ActionListener {
         viewPlayersFrame.pack();
     }
 
-
+    // MODIFIES: this, PlayersGui
+    // EFFECTS: sets the PlayersGui as a JTable
     public void setPlayerGuiModel() {
         allPlayersToView = new PlayersGui(guiLeague);
         viewPlayersTable = new JTable(allPlayersToView);
         viewPlayersTable.setBackground(Color.gray);
         viewPlayersTable.setFillsViewportHeight(true);
         viewPlayersPanel.add(new JScrollPane(viewPlayersTable));
+        viewPlayersTable.getTableHeader().setOpaque(false);
+        viewPlayersTable.getTableHeader().setBackground(Color.lightGray);
     }
 
+    // EFFECTS: sets the functionality of adding a player to a team.
     public void setAddPlayerToTeam() {
         addPlayerToTeamPanel = new JPanel();
         addPlayerToTeamPanel.setSize(250,350);
@@ -273,6 +330,8 @@ public class FantasyAppGui extends JFrame implements ActionListener {
         addPlayerToTeamPanel.add(completeAddPlayer);
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets the button functionality to complete adding a player to a team.
     public void completeAddPlayerButton() {
         String playerName = addPlayerText.getText();
         String teamName = addPlayerToTeamText.getText();
@@ -291,6 +350,7 @@ public class FantasyAppGui extends JFrame implements ActionListener {
         }
     }
 
+    // EFFECTS: saves the state of the game
     private void pressSaveState() {
         try {
             jsonWriter.open();
@@ -302,6 +362,7 @@ public class FantasyAppGui extends JFrame implements ActionListener {
         }
     }
 
+    // EFFECTS: loads the state of the game
     private void pressLoadState() {
         try {
             System.out.println("Loading...");
@@ -315,6 +376,7 @@ public class FantasyAppGui extends JFrame implements ActionListener {
         }
     }
 
+    // EFFECTS: initializes the behaviour to add a team to the league
     public void pressCreateTeam() {
         createTeamFrame = new JFrame();
         createTeamFrame.setPreferredSize(new Dimension(300,200));
@@ -342,6 +404,8 @@ public class FantasyAppGui extends JFrame implements ActionListener {
         createTeamFrame.pack();
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets the JText fields for creating a team behaviour
     public void createTeamLabelTextButton() {
         teamNameLabel = new JLabel("Enter Team Name:");
         teamNameLabel.setBounds(80,40,200,50);
@@ -353,15 +417,18 @@ public class FantasyAppGui extends JFrame implements ActionListener {
         completeCreateTeam.setBounds(100,150,150,70);
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets the button functionality of creating a team.
     public void completeCreateTeamButton() {
         String input = teamNameText.getText();
         allTeamsGui.add(new Team(input));
         teamCreatedSuccessfully.setText("Team Successfully Added to the League");
     }
 
+    // EFFECTS: intializes the behaviour to view all the teams in the league
     private void pressViewLeague() {
         viewLeagueFrame = new JFrame();
-        viewLeagueFrame.setPreferredSize(new Dimension(500,700));
+        viewLeagueFrame.setPreferredSize(new Dimension(500,500));
         viewLeagueFrame.setTitle("League Table");
         viewLeagueFrame.setLocation(450,100);
 
@@ -376,12 +443,16 @@ public class FantasyAppGui extends JFrame implements ActionListener {
         viewLeagueFrame.pack();
     }
 
+    // MODIFIES: this, TeamsGui
+    // EFFECTS: sets the TeamsGui abstract table model as a JTable
     private void setViewLeagueTable() {
         allTeamsInLeague = new TeamsGui(guiLeague);
         allTeamsTable = new JTable(allTeamsInLeague);
         allTeamsTable.setBackground(Color.lightGray);
         allTeamsTable.setFillsViewportHeight(true);
         viewLeaguePanel.add(new JScrollPane(allTeamsTable));
+        allTeamsTable.getTableHeader().setOpaque(false);
+        allTeamsTable.getTableHeader().setBackground(Color.lightGray);
     }
 
 }
