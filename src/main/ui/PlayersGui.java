@@ -10,7 +10,7 @@ public class PlayersGui extends AbstractTableModel {
 
     private League league;
     private final String[] columnNames = new String[]{
-            "Name", "Position", "Price", "Goals", "Assists", "Points"
+            "NAME", "POSITION", "PRICE", "GOALS", "ASSISTS", "POINTS"
     };
     private final Class[] columnClass = new Class[]{
             String.class, String.class, Double.class, Integer.class, Integer.class, Integer.class
@@ -67,13 +67,13 @@ public class PlayersGui extends AbstractTableModel {
         } else if (4 == columnIndex) {
             return player.getAssists();
         } else if (5 == columnIndex) {
-            return ((player.getGoals() * 2) + (player.getAssists() *  1));
+            return ((player.getGoals() * 2) + (player.getAssists() * 1));
         }
         return null;
     }
 
 
-    // EFFECTS: sets the behaviour to update statistics of goals and assists on the table.
+    //EFFECTS: sets the behaviour to update statistics of goals and assists on the table.
     @Override
     public void setValueAt(Object val, int rowIndex, int columnIndex) {
         Player player = league.getPlayersInLeague().get(rowIndex);
@@ -82,7 +82,7 @@ public class PlayersGui extends AbstractTableModel {
                 player.scoredGoal((Integer) val);
             } else {
                 for (Team team : league.getTeamsInLeague()) {
-                    if (team.inTeamForGivenPlayer(player)) {
+                    if (team.inTeamForGivenPlayer(player) && player.inTeamForPlayer()) {
                         player.scoredGoalTeam((Integer) val, team);
                     }
                 }
@@ -91,14 +91,15 @@ public class PlayersGui extends AbstractTableModel {
             if (!player.inTeamForPlayer()) {
                 player.scoredAssist((Integer) val);
             } else {
-                for (Team tm : league.getTeamsInLeague()) {
-                    if (tm.inTeamForGivenPlayer(player)) {
-                        player.scoredAssistTeam((Integer) val, tm);
+                for (Team team : league.getTeamsInLeague()) {
+                    if (team.inTeamForGivenPlayer(player) && player.inTeamForPlayer()) {
+                        player.scoredAssistTeam((Integer) val, team);
                     }
                 }
             }
         }
     }
+
 
     // EFFECTS: allows the table to be edited
     @Override
@@ -107,3 +108,5 @@ public class PlayersGui extends AbstractTableModel {
     }
 
 }
+
+// SOURCES: Abstract Table Model https://docs.oracle.com/javase/7/docs/api/javax/swing/table/AbstractTableModel.html

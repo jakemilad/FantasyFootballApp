@@ -50,6 +50,9 @@ public class FantasyAppGui extends JFrame implements ActionListener {
     private Player mbappe = new Player("Mbappe","ATT",12.0);
     private Player mane = new Player("Mane","ATT",11.0);
     private Player antonio = new Player("Antonio","ATT",7.0);
+    private Player hazard = new Player("Hazard","ATT",9.5);
+    private Player milad = new Player("Milad","ATT",10.5);
+    private Player khan = new Player("Khan", "ATT",11.0);
     // Initialize graphics fields
     protected static final int WIDTH = 900;
     protected static final int HEIGHT = 650;
@@ -75,6 +78,7 @@ public class FantasyAppGui extends JFrame implements ActionListener {
     private JLabel playerAddedSuccessfully;
     private JLabel addPlayerToWhichTeam;
     private JLabel mesiLabel;
+    private JLabel splashScreen;
     // JTexts
     private JTextField teamNameText;
     private JTextField addPlayerText;
@@ -96,6 +100,7 @@ public class FantasyAppGui extends JFrame implements ActionListener {
     private JTable allTeamsTable;
     // Images
     private BufferedImage mesiImage;
+    private BufferedImage siuImage;
 
 
     // EFFECTS: Fantasy App constructor that initializes all data and graphics.
@@ -140,23 +145,69 @@ public class FantasyAppGui extends JFrame implements ActionListener {
         allPlayersGui.add(antonio);
         allPlayersGui.add(mane);
         allPlayersGui.add(kane);
+        addThreeMorePlayers();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds rest of Player objects to the list of Players in the game.
+    public void addThreeMorePlayers() {
+        allPlayersGui.add(hazard);
+        allPlayersGui.add(khan);
+        allPlayersGui.add(milad);
     }
 
 
     // EFFECTS: initializes the main JFrame and main menu panel of the Fantasy App
     public void initializeGraphics() {
+        setSplashScreen();
+
         mainFrame = new JFrame("Super League Fantasy App");
         mainFrame.setLayout(new BorderLayout(30,30));
         mainFrame.setMinimumSize(new Dimension(WIDTH,HEIGHT));
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         createMenu();
+        setSiuIcon();
+
         mainFrame.add(menuPanel);
         mainFrame.pack();
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets the splash screen for the application
+    public void setSplashScreen() {
+        try {
+            siuImage = ImageIO.read(new File("./data/splash.jpeg"));
+            splashScreen = new JLabel(new ImageIcon(siuImage));
+            JWindow splashWindow = new JWindow();
+            splashWindow.add(splashScreen);
+            splashWindow.setBounds(450, 200, 550, 401);
+            splashWindow.setVisible(true);
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            splashWindow.setVisible(false);
+            splashWindow.dispose();
+        } catch (IOException e) {
+            System.out.println("No file");
+        }
+    }
 
+    // EFFECTS: sets the default Java icon for the fantasy app.
+    public void setSiuIcon() {
+        try {
+            siuImage = ImageIO.read(new File("./data/siu.jpeg"));
+            mainFrame.setIconImage(siuImage);
+        } catch (IOException e) {
+            System.out.println("invalid file");
+        }
+    }
+
+    // MODIFIES: this
     // EFFECTS: reads imported image in data folder to be added as a component to JPanel
     public void mesiImage() {
         try {
@@ -186,7 +237,7 @@ public class FantasyAppGui extends JFrame implements ActionListener {
 
     // EFFECTS: Initializes panel of the main menu of the Fantasy App.
     public void createMenu() {
-        menuLabel.setFont(new Font("Serif", Font.BOLD, 40));
+        menuLabel.setFont(new Font("Comic Sans", Font.BOLD, 40));
         menuLabel.setBorder(BorderFactory.createEmptyBorder(300,200,300,200));
 
         menuPanel.setLayout(new GridLayout(0, 1));
@@ -425,7 +476,7 @@ public class FantasyAppGui extends JFrame implements ActionListener {
         teamCreatedSuccessfully.setText("Team Successfully Added to the League");
     }
 
-    // EFFECTS: intializes the behaviour to view all the teams in the league
+    // EFFECTS: initializes the behaviour to view all the teams in the league
     private void pressViewLeague() {
         viewLeagueFrame = new JFrame();
         viewLeagueFrame.setPreferredSize(new Dimension(500,500));
@@ -454,5 +505,12 @@ public class FantasyAppGui extends JFrame implements ActionListener {
         allTeamsTable.getTableHeader().setOpaque(false);
         allTeamsTable.getTableHeader().setBackground(Color.lightGray);
     }
-
 }
+
+// SOURCES:
+// Alex Lee on YouTube https://www.youtube.com/watch?v=5o3fMLPY7qY&ab_channel=AlexLee
+// Bro Code on YouTube https://www.youtube.com/watch?v=-IMys4PCkIA&t=424s&ab_channel=BroCode
+// Splash screen https://stackoverflow.com/questions/16134549/how-to-make-a-splash-screen-for-gui
+// Image Icon to JPanel https://stackoverflow.com/questions/299495/how-to-add-an-image-to-a-jpanel
+// JTable https://docs.oracle.com/javase/tutorial/uiswing/components/table.html
+// SimpleDrawingPlayer repository

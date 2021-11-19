@@ -100,7 +100,7 @@ public class Player implements Writeable {
     // EFFECTS: when a player gets an assist and has been assigned to a team, both the player
     // and the team they are assigned to accumulate points based on the assistPoints multiplier
     public void scoredAssistTeam(int assist, Team t) {
-        this.goals = assist + this.goals;
+        this.assists = assist + this.assists;
         this.points = (assist * assistPoints) + this.points;
         t.teamPoints = (assist * assistPoints) + t.teamPoints;
     }

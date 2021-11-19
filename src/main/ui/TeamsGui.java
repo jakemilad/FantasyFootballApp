@@ -9,7 +9,7 @@ public class TeamsGui extends AbstractTableModel {
 
     private League league;
     private final String[] columnNames = new String[] {
-            "Name", "Points"
+            "TEAM NAME", "POINTS"
     };
     private final Class[] columnClass = new Class[] {
             String.class, Integer.class
@@ -62,3 +62,5 @@ public class TeamsGui extends AbstractTableModel {
         return null;
     }
 }
+
+// SOURCES: Abstract Table Model https://docs.oracle.com/javase/7/docs/api/javax/swing/table/AbstractTableModel.html
