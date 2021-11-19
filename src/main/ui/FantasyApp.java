@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// A Fantasy football application
 public class FantasyApp {
     private League theLeague;
     private Scanner input;

@@ -17,6 +17,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+// A Fantasy football application with a graphical user interface implemented with Java Swing
 public class FantasyAppGui extends JFrame implements ActionListener {
 
     // Initialize data fields
@@ -101,6 +102,7 @@ public class FantasyAppGui extends JFrame implements ActionListener {
     // Images
     private BufferedImage mesiImage;
     private BufferedImage siuImage;
+    private BufferedImage splashIcon;
 
 
     // EFFECTS: Fantasy App constructor that initializes all data and graphics.
@@ -179,8 +181,8 @@ public class FantasyAppGui extends JFrame implements ActionListener {
     // EFFECTS: sets the splash screen for the application
     public void setSplashScreen() {
         try {
-            siuImage = ImageIO.read(new File("./data/splash.jpeg"));
-            splashScreen = new JLabel(new ImageIcon(siuImage));
+            splashIcon = ImageIO.read(new File("./data/splash.jpeg"));
+            splashScreen = new JLabel(new ImageIcon(splashIcon));
             JWindow splashWindow = new JWindow();
             splashWindow.add(splashScreen);
             splashWindow.setBounds(450, 200, 550, 401);

@@ -5,6 +5,7 @@ import model.Team;
 
 import javax.swing.table.AbstractTableModel;
 
+// An Abstract Table Model to represent all the Team objects in a league in the application
 public class TeamsGui extends AbstractTableModel {
 
     private League league;
