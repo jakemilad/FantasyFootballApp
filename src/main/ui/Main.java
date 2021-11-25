@@ -1,6 +1,5 @@
 package ui;
 
-import ui.FantasyAppGui;
 
 import java.io.FileNotFoundException;
 

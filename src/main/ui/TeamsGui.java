@@ -8,11 +8,11 @@ import javax.swing.table.AbstractTableModel;
 // An Abstract Table Model to represent all the Team objects in a league in the application
 public class TeamsGui extends AbstractTableModel {
 
-    private League league;
-    private final String[] columnNames = new String[] {
+    protected League league;
+    protected final String[] columnNames = new String[] {
             "TEAM NAME", "POINTS"
     };
-    private final Class[] columnClass = new Class[] {
+    protected final Class[] columnClass = new Class[] {
             String.class, Integer.class
     };
 

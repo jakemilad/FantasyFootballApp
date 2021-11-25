@@ -53,6 +53,7 @@ public class Player implements Writeable {
     public void scoredGoal(int goal) {
         this.goals = goal + this.goals;
         this.points = (goal * goalPoints) + this.points;
+        EventLog.getInstance().logEvent(new Event(name + " scored " + goal + " goal(s)."));
     }
 
     // REQUIRES: assist > 0
@@ -62,6 +63,7 @@ public class Player implements Writeable {
     public void scoredAssist(int assist) {
         this.assists = assist + assists;
         this.points = (assist * assistPoints) + points;
+        EventLog.getInstance().logEvent(new Event(name + " assisted " + assist + " time(s)."));
     }
 
     // EFFECTS: returns the number of points a player has accumulated
@@ -93,6 +95,8 @@ public class Player implements Writeable {
         this.goals = goal + this.goals;
         this.points = (goal * goalPoints) + this.points;
         t.teamPoints = (goal * goalPoints) + t.teamPoints;
+        EventLog.getInstance().logEvent(new Event(name + " scored " + goal + " goal(s) for "
+                + t.getTeamName() + "'s team."));
     }
 
     // REQUIRES: assist > 0, t to be a valid and existing team
@@ -103,6 +107,8 @@ public class Player implements Writeable {
         this.assists = assist + this.assists;
         this.points = (assist * assistPoints) + this.points;
         t.teamPoints = (assist * assistPoints) + t.teamPoints;
+        EventLog.getInstance().logEvent(new Event(name + " assisted " + assist + " time(s) for  "
+                + t.getTeamName() + "'s team."));
     }
 
     // EFFECTS: returns true if the player is in a team

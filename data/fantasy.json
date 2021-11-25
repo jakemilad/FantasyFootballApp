@@ -1,72 +1,53 @@
 {
-    "leagueTeams": [
-        {
-            "TeamPoints": 24,
-            "TeamName": "Jake",
-            "PlayersInTeam": [
-                "Messi",
-                "Ronaldo",
-                "Salah"
-            ]
-        },
-        {
-            "TeamPoints": 33,
-            "TeamName": "Milad",
-            "PlayersInTeam": [
-                "Salah",
-                "Kante",
-                "De Bruyne"
-            ]
-        }
-    ],
+    "leagueTeams": [],
     "leaguePlayers": [
         {
-            "Points": 7,
-            "Assists": 3,
+            "Points": 0,
+            "Assists": 0,
             "Position": "ATT",
             "Price": 15,
             "PlayerName": "Messi",
-            "Goals": 2
+            "Goals": 0
         },
         {
-            "Points": 8,
-            "Assists": 2,
+            "Points": 0,
+            "Assists": 0,
             "Position": "ATT",
             "Price": 15,
             "PlayerName": "Ronaldo",
-            "Goals": 3
+            "Goals": 0
         },
         {
-            "Points": 18,
-            "Assists": 2,
+            "Points": 0,
+            "Assists": 0,
             "Position": "ATT",
             "Price": 14.5,
             "PlayerName": "Salah",
-            "Goals": 8
+            "Goals": 0
         },
         {
-            "Points": 14,
-            "Assists": 4,
+            "Points": 0,
+            "Assists": 0,
             "Position": "MID",
             "Price": 10,
             "PlayerName": "Kante",
-            "Goals": 5
+            "Goals": 0
         },
         {
-            "Points": 9,
-            "Assists": 5,
+            "Points": 0,
+            "Assists": 0,
             "Position": "MID",
             "Price": 13.5,
             "PlayerName": "Fernandes",
-            "Goals": 2
+            "Goals": 0
         },
         {
-            "Points": 10,
-            "Assists": 8,
+            "Points": 0,
+            "Assists": 0,
             "Position": "MID",
             "Price": 14,
             "PlayerName": "De Bruyne",
-            "Goals": 1
+            "Goals": 0
         },
         {
             "Points": 0,

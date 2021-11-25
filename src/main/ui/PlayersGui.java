@@ -9,11 +9,11 @@ import javax.swing.table.AbstractTableModel;
 // An Abstract Table Model to be used to represent the data for all the player objects in the application
 public class PlayersGui extends AbstractTableModel {
 
-    private League league;
-    private final String[] columnNames = new String[]{
+    protected League league;
+    protected final String[] columnNames = new String[]{
             "NAME", "POSITION", "PRICE", "GOALS", "ASSISTS", "POINTS"
     };
-    private final Class[] columnClass = new Class[]{
+    protected final Class[] columnClass = new Class[]{
             String.class, String.class, Double.class, Integer.class, Integer.class, Integer.class
     };
 

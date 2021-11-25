@@ -1,8 +1,6 @@
 package ui;
 
-import model.League;
-import model.Team;
-import model.Player;
+import model.*;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -37,7 +35,7 @@ public class FantasyApp {
     private JsonReader jsonReader;
     private static final String JSON_STORE = "./data/fantasy.json";
 
-
+    // EFFECTS: constructs a Fantasy Football application
     public FantasyApp() throws FileNotFoundException {
         input = new Scanner(System.in);
         jsonWriter = new JsonWriter(JSON_STORE);

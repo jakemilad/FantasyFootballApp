@@ -29,11 +29,13 @@ public class Team implements Writeable {
             teamPlayers.add(p);
             p.inTeam = true;
         }
+        EventLog.getInstance().logEvent(new Event("Added " + p.getName() + " to " + name + "'s team."));
     }
 
     // EFFECTS: removes player from team
     public void removePlayer(Player p) {
         teamPlayers.remove(p);
+        EventLog.getInstance().logEvent(new Event("Removed " + p.getName() + " from " + name + "'s team."));
     }
 
 
