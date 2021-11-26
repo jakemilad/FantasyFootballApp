@@ -72,13 +72,20 @@ Saka assisted 2 time(s).
 
 Process finished with exit code 0
 
+The addTeam and addPlayerToLeague behaviour will not get logged due to the unidirectional relationship between all
+the classes. A League can have 0 or many Players or 0 or many Teams, but Players and Teams can only be assigned to 1 
+League. Therefore, in the FantasyAppGui, a League only exists as a getter to the list of Teams in the instantiated
+League constructor. Therefore, the addTeam or addPlayerToLeague from the League object does not get called because it
+never needs to as all Teams and Players can only exist in 1 common league. Therefore, does not qualify as modifying 
+"this" and will not be logged.
+
 
 ## Phase 4: Task 3
 I am quite satisfied with the construction of my application in terms of the class hierarchy. I think it was very easy 
-and logical to follow that a League is a list of Teams and a Team is a list of Players. It made all the associations
-between these classes much less confusing. Moreover, this was extremely helpful when it came to saving and loading with
-JSon, as I could essentially just write a League, which would contain all the needed information to save, which would
-be dependent on Teams and Players. In terms of the Gui, I would have probably included some type of LeagueGui table 
-model which would extract the specific League behaviour from the TeamsGui table model. This isn't particularly 
-necessary as the functionality of the TeamsGui table model sufficiently covers the needed behaviour of a LeagueGui 
-table model, but it would improve cohesion.
+and logical to follow that a League is a list of Teams and a Team is a list of Players. This unidirectional relationship
+made all the associations between these classes much less confusing. Moreover, this was extremely helpful when it came 
+to saving and loading with JSon, as I could essentially just write a League, which would contain all the needed 
+information to save, which would be dependent on Teams and Players. In terms of the Gui, I would have probably included 
+some type of LeagueGui table model which would extract the specific League behaviour from the TeamsGui table model. 
+This isn't particularly necessary as the functionality of the TeamsGui table model sufficiently covers the needed 
+behaviour of a LeagueGui table model, but it would improve cohesion.
